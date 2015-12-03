@@ -1,6 +1,5 @@
 Title: Hello World
-Category: Blog
-Tags: pelican, dev log
+Tags: pelican, blogging
 Summary: Obligatory hello world post
 
 In the finest tradition of new projects this is the hello world post for my dev log aka blog of other stuff too. The intent here is to document my work on various projects on my Github account, so naturally the log itself should *also* be a project on my Github account. And here we are.
@@ -14,4 +13,4 @@ Things I need to figure out:
 - different sections n' stuff for the site
 - what the heck are all the right settings
 
-Here we go!
+Oh and licensing. I guess I need to figure out the right badges and social links and blahbeddyboo. Here we go!
