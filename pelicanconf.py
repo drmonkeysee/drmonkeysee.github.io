@@ -36,3 +36,7 @@ DEFAULT_DATE = 'fs'
 SLUGIFY_SOURCE = 'basename'
 ARTICLE_URL = '{slug}'
 ARTICLE_SAVE_AS = '{slug}/index.html'
+# the theme still includes and links to author, it's just a blank url
+AUTHOR_URL = ''
+AUTHOR_SAVE_AS = ''
+AUTHORS_SAVE_AS = ''
