@@ -1,4 +1,5 @@
 Title: Hello World
+Category: blog
 Tags: pelican, blogging
 Summary: Obligatory hello world post
 
