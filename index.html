@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Dev Log and also Other Blog Stuff too</title>
+        <title>Dev Log and also other Blog Stuff too</title>
         <link rel="stylesheet" href="http://drmonkeysee.github.io/theme/css/main.css" />
-        <link href="http://drmonkeysee.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Dev Log and also Other Blog Stuff too Atom Feed" />
+        <link href="http://drmonkeysee.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Dev Log and also other Blog Stuff too Atom Feed" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -16,14 +16,45 @@
 <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
 </a>
         <header id="banner" class="body">
-                <h1><a href="http://drmonkeysee.github.io/">Dev Log and also Other Blog Stuff too </a></h1>
+                <h1><a href="http://drmonkeysee.github.io/">Dev Log and also other Blog Stuff too </a></h1>
                 <nav><ul>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/hello-world">Hello World</a></h1>
+                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/hello-published">Hello Published!</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-12-04T21:08:09-08:00">
+                Published: Fri 04 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Dr Monkeysee</a>
+        </address>
+<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
+<p>tags: <a href="http://drmonkeysee.github.io/pelican">pelican</a> <a href="http://drmonkeysee.github.io/blogging">blogging</a> </p>
+</footer><!-- /.post-info --><p>After fiddling with lots of settings and url schemes publishing was <strong>super</strong> easy! Turns out the current version of Pelican (3.6.3 as of this writing) auto-generates github page scripts so one <code>make github</code> call later and *POOF* my dev log is a real boy.</p>
+<p>At the moment I'm still running on the built-in theme so I to need fix that. You may notice the author link doesn't go anywhere. I'm the only author but the theme is stubbornly insisting on linking to it anyway. I gotta do some other spicing up like a fancy favicon or something.</p>
+<p>As for plugins, hopefully there's something that sets meta tags. All the cool kids have meta tags these days. And GitHub-style code blocks. Oh, looks like the default settings already have that:</p>
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;a fancy blog&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Also I haven't picked a license yet so... uh... no one steal anything in the meantime! Next step: make this blog post obsolete by changing everything about how the blog works.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://drmonkeysee.github.io/hello-world" rel="bookmark"
+                           title="Permalink to Hello World">Hello World</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-04T19:16:30-08:00">
                 Published: Fri 04 December 2015
@@ -34,17 +65,12 @@
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/pelican">pelican</a> <a href="http://drmonkeysee.github.io/blogging">blogging</a> </p>
-</footer><!-- /.post-info --><p>In the finest tradition of new projects this is the hello world post for my dev log aka blog of other stuff too. The intent here is to document my work on various projects on my Github account, so naturally the log itself should <em>also</em> be a project on my Github account. And here we are.</p>
-<p>This first entry is a test of the publishing system itself and I imagine I'll be tweaking it a bit before it actually shows up live anywhere. The breakdown: I'm using <a href="http://docs.getpelican.com/en/3.6.3/index.html">Pelican</a> as the blog publisher and generally following <a href="http://ntanjerome.org/blog/how-to-setup-github-user-page-with-pelican/">this guide</a> to get it all working. A nice surprise, the latest version of Pelican seems to support Github pages publishing directly so I may not need the branch-dance documented in the guide. I'm also checking <a href="http://mathamy.com">mathamy</a> and <a href="http://eev.ee">fuzzy notepad</a> as a guide for organization. If it all works out my next entry will probably detail exactly how I got this blog set up.</p>
-<p>Things I need to figure out:</p>
-<ul>
-<li>themes</li>
-<li>plugins I may want</li>
-<li>different sections n' stuff for the site</li>
-<li>what the heck are all the right settings</li>
-</ul>
-<p>Oh and licensing. I guess I need to figure out the right badges and social links and blahbeddyboo. Here we go!</p>                </article>
-            </aside><!-- /#featured -->
+</footer><!-- /.post-info -->                <p>Obligatory hello world post</p>
+                <a class="readmore" href="http://drmonkeysee.github.io/hello-world">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
