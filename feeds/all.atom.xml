@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dev Log and also Other Blog Stuff too</title><link href="http://drmonkeysee.github.io/" rel="alternate"></link><link href="http://drmonkeysee.github.io/feeds/all.atom.xml" rel="self"></link><id>http://drmonkeysee.github.io/</id><updated>2015-12-04T19:16:30-08:00</updated><entry><title>Hello World</title><link href="http://drmonkeysee.github.io/hello-world" rel="alternate"></link><updated>2015-12-04T19:16:30-08:00</updated><author><name>Dr Monkeysee</name></author><id>tag:drmonkeysee.github.io,2015-12-04:hello-world</id><summary type="html">&lt;p&gt;In the finest tradition of new projects this is the hello world post for my dev log aka blog of other stuff too. The intent here is to document my work on various projects on my Github account, so naturally the log itself should &lt;em&gt;also&lt;/em&gt; be a project on my Github account. And here we are.&lt;/p&gt;
+&lt;p&gt;This first entry is a test of the publishing system itself and I imagine I'll be tweaking it a bit before it actually shows up live anywhere. The breakdown: I'm using &lt;a href="http://docs.getpelican.com/en/3.6.3/index.html"&gt;Pelican&lt;/a&gt; as the blog publisher and generally following &lt;a href="http://ntanjerome.org/blog/how-to-setup-github-user-page-with-pelican/"&gt;this guide&lt;/a&gt; to get it all working. A nice surprise, the latest version of Pelican seems to support Github pages publishing directly so I may not need the branch-dance documented in the guide. I'm also checking &lt;a href="http://mathamy.com"&gt;mathamy&lt;/a&gt; and &lt;a href="http://eev.ee"&gt;fuzzy notepad&lt;/a&gt; as a guide for organization. If it all works out my next entry will probably detail exactly how I got this blog set up.&lt;/p&gt;
+&lt;p&gt;Things I need to figure out:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;themes&lt;/li&gt;
+&lt;li&gt;plugins I may want&lt;/li&gt;
+&lt;li&gt;different sections n' stuff for the site&lt;/li&gt;
+&lt;li&gt;what the heck are all the right settings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Oh and licensing. I guess I need to figure out the right badges and social links and blahbeddyboo. Here we go!&lt;/p&gt;</summary><category term="pelican"></category><category term="blogging"></category></entry></feed>
