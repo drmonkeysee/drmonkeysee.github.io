@@ -23,7 +23,34 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/05/hello-published">Hello Published!</a></h1>
+                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping">Theme Shopping</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-12-05T20:47:19-08:00">
+                Published: Sat 05 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
+        </address>
+<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
+<p>tags: <a href="http://drmonkeysee.github.io/pelican">pelican</a> <a href="http://drmonkeysee.github.io/blogging">blogging</a> </p>
+</footer><!-- /.post-info --><p>I've settled on a url scheme and other random settings so the time has come to shop for a theme. I popped over to <a href="https://github.com/getpelican/pelican-themes">pelican-themes</a> and... frankly... not crazy about what's on offer.</p>
+<p>Don't get me wrong, the craftsmanship on display is fine, but none of them grab me. However the pelican-bootstrap3 theme points a way forward. What if I just built my own theme on top of bootstrap? Follow up question: why don't I just use pelican-bootstrap3?</p>
+<p>In short: I want control. The pelican-bootstrap3 theme contains the contents of bootstrap3 inline instead of pulling it in from a CDN, which adds a maintenance burden keeping everything up-to-date with official release channels. I'm one of those devs that likes to sit on the latest versions as seamlessly as possible and cleaning up someone else's theme to square it away to my satisfaction sounds less fun than just writing it myself.</p>
+<p>So why not? Well it means this blog is gonna look pretty entry-level for longer than I wanted. On the other hand I control the blog from the ground up and might as well learn <a href="http://jinja.pocoo.org">Jinja</a> while I'm here. As will become evident in later entries much of my hobby work is about building stuff from scratch so carrying that philosophy forward to my dev log seems a natural fit.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/05/hello-published" rel="bookmark"
+                           title="Permalink to Hello Published!">Hello Published!</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-05T18:54:47-08:00">
                 Published: Sat 05 December 2015
@@ -34,19 +61,10 @@
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/pelican">pelican</a> <a href="http://drmonkeysee.github.io/blogging">blogging</a> </p>
-</footer><!-- /.post-info --><p>After fiddling with lots of settings and url schemes publishing was <strong>super</strong> easy! Turns out the current version of Pelican (3.6.3 as of this writing) auto-generates github page scripts so one <code>make github</code> call later and *POOF* my dev log is a real boy.</p>
-<p>At the moment I'm still running on the built-in theme so I to need fix that. You may notice the author link doesn't go anywhere. I'm the only author but the theme is stubbornly insisting on linking to it anyway. I gotta do some other spicing up like a fancy favicon or something.</p>
-<p>As for plugins, hopefully there's something that sets meta tags. All the cool kids have meta tags these days. And GitHub-style code blocks. Oh, looks like the default settings already have that:</p>
-<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;a fancy blog&#39;</span><span class="p">);</span>
-</pre></div>
-
-
-<p>Also I haven't picked a license yet so... uh... no one steal anything in the meantime! Next step: make this blog post obsolete by changing everything about how the blog works.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Hey look! Published!</p>
+                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/05/hello-published">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
