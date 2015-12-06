@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = 'Dr Monkeysee'
+AUTHOR = 'Brandon Stansbury'
 SITENAME = 'Dev Log and also other Blog Stuff too'
 SITEURL = 'http://drmonkeysee.github.io'
 PATH = 'content'
@@ -36,8 +36,8 @@ RELATIVE_URLS = True
 # Url stuff
 DEFAULT_DATE = 'fs'
 SLUGIFY_SOURCE = 'basename'
-ARTICLE_URL = '{slug}'
-ARTICLE_SAVE_AS = '{slug}/index.html'
+ARTICLE_URL = '{category}/{date:%Y}/{date:%m}/{date:%d}/{slug}'
+ARTICLE_SAVE_AS = '{category}/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html'
 TAG_URL = '{slug}'
 TAG_SAVE_AS = '{slug}/index.html'
 CATEGORY_URL = '{slug}'
