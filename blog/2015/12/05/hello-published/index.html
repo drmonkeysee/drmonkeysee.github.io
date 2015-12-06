@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Hello World</title>
+        <title>Hello Published!</title>
         <link rel="stylesheet" href="http://drmonkeysee.github.io/theme/css/main.css" />
         <link href="http://drmonkeysee.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Dev Log and also other Blog Stuff too Atom Feed" />
 
@@ -24,32 +24,30 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="http://drmonkeysee.github.io/hello-world" rel="bookmark"
-           title="Permalink to Hello World">Hello World</a></h1>
+        <a href="http://drmonkeysee.github.io/blog/2015/12/05/hello-published" rel="bookmark"
+           title="Permalink to Hello Published!">Hello Published!</a></h1>
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="drmonkeysee">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-12-04T19:16:30-08:00">
-                Published: Fri 04 December 2015
+        <abbr class="published" title="2015-12-05T18:54:47-08:00">
+                Published: Sat 05 December 2015
         </abbr>
 
         <address class="vcard author">
-                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Dr Monkeysee</a>
+                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/pelican">pelican</a> <a href="http://drmonkeysee.github.io/blogging">blogging</a> </p>
-</footer><!-- /.post-info -->      <p>In the finest tradition of new projects this is the hello world post for my dev log aka blog of other stuff too. The intent here is to document my work on various projects on my Github account, so naturally the log itself should <em>also</em> be a project on my Github account. And here we are.</p>
-<p>This first entry is a test of the publishing system itself and I imagine I'll be tweaking it a bit before it actually shows up live anywhere. The breakdown: I'm using <a href="http://docs.getpelican.com/en/3.6.3/index.html">Pelican</a> as the blog publisher and generally following <a href="http://ntanjerome.org/blog/how-to-setup-github-user-page-with-pelican/">this guide</a> to get it all working. A nice surprise, the latest version of Pelican seems to support Github pages publishing directly so I may not need the branch-dance documented in the guide. I'm also checking <a href="http://mathamy.com">mathamy</a> and <a href="http://eev.ee">fuzzy notepad</a> as a guide for organization. If it all works out my next entry will probably detail exactly how I got this blog set up.</p>
-<p>Things I need to figure out:</p>
-<ul>
-<li>themes</li>
-<li>plugins I may want</li>
-<li>different sections n' stuff for the site</li>
-<li>what the heck are all the right settings</li>
-</ul>
-<p>Oh and licensing. I guess I need to figure out the right badges and social links and blahbeddyboo. Here we go!</p>
+</footer><!-- /.post-info -->      <p>After fiddling with lots of settings and url schemes publishing was <strong>super</strong> easy! Turns out the current version of Pelican (3.6.3 as of this writing) auto-generates github page scripts so one <code>make github</code> call later and *POOF* my dev log is a real boy.</p>
+<p>At the moment I'm still running on the built-in theme so I to need fix that. You may notice the author link doesn't go anywhere. I'm the only author but the theme is stubbornly insisting on linking to it anyway. I gotta do some other spicing up like a fancy favicon or something.</p>
+<p>As for plugins, hopefully there's something that sets meta tags. All the cool kids have meta tags these days. And GitHub-style code blocks. Oh, looks like the default settings already have that:</p>
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;a fancy blog&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Also I haven't picked a license yet so... uh... no one steal anything in the meantime! Next step: make this blog post obsolete by changing everything about how the blog works.</p>
     </div><!-- /.entry-content -->
 
   </article>
