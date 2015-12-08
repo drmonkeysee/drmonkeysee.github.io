@@ -19,36 +19,36 @@ Status: draft
 - plugins
 - license
 
-I followed a [couple](http://mathamy.com/migrating-to-github-pages-using-pelican.html) [handy](http://ntanjerome.org/blog/how-to-setup-github-user-page-with-pelican/) [guides](https://fedoramagazine.org/make-github-pages-blog-with-pelican/) on setting up this blog. I encourage everyone to go check them out, but I found they were slightly out of date with the latest version of Pelican so I'm documenting my own setup process here so it may also some day be a handy guide.
+How did I set up this blog? Let's find out.
 
-## Create a GitHub Pages repository
+First I followed a [couple](http://mathamy.com/migrating-to-github-pages-using-pelican.html) [handy](http://ntanjerome.org/blog/how-to-setup-github-user-page-with-pelican/) [guides](https://fedoramagazine.org/make-github-pages-blog-with-pelican/). I encourage everyone to go check them out, but I found they were slightly out of date with the latest version of Pelican so I'll document my own setup process here so it may also some day be a handy guide.
 
-I'm hosting the blog on GitHub pages which provides a real convenient location to serve a static site. The emphasis is on *static* site; there is no server-side framework so your site must be made up of HTML, CSS, and JavaScript files. Hence the need for a static site generator like [Jekyll](http://jekyllrb.com) (which GitHub Pages recommends) or [Pelican](http://docs.getpelican.com/en/3.6.3/) (because I like Python better than Ruby).
+## Hosting on GitHub Pages
 
-The first step is to actually have a GitHub account. If you don't, Pelican supports hosting on several other platforms but I won't be talking about those here.
+I already have a GitHub account so it's a natural fit to host my blog on GitHub Pages, especially given this is primarily about stuff on said GitHub account. GitHub pages provides a convenient location to serve a static site. The emphasis is on *static* site; there is no server-side framework so my blog must be made up of HTML, CSS, and JavaScript files. Which is just fine by me. I have a lot of experience with server-side web frameworks and there's very little reason why a blog needs that horsepower (I'm sure the people at [Squarespace](http://www.squarespace.com) are very nice). Also hosting on GitHub Pages allows me to write and publish within the same workflow I'm already using to program in instead of relying on some weird web editor or something.
 
-If you have a [GitHub](https://github.com) account then head over to the [GitHub Pages documentation](https://pages.github.com) to figure out what git repository you need to create to host your site. In my case I'm hosting a "User or organization site" instead of a "Project site" so the name of my repo is `drmonkeysee.github.io`.
+Hence the need for a static site generator like [Jekyll](http://jekyllrb.com) (which GitHub Pages recommends) or [Pelican](http://docs.getpelican.com/en/3.6.3/) (because I like Python better than Ruby).
 
-Once you have the repository created you can follow the basic instructions to get something up and running. Note your site will be hosted from the **master** branch. We'll use that to our benefit once Pelican enters the scene.
+Starting at my [GitHub](https://github.com) account I head over to the [GitHub Pages documentation](https://pages.github.com) and follow the instructions to set up a "User or organization site". At the end of it I have a new repositiory: `drmonkeysee.github.io`.
+
+Note a user site will be hosted from the **master** branch. We'll use that to our benefit once Pelican enters the scene.
 
 ## Does the Hosting work?
 
-Now we're going to create a real simple test page to make sure everything is working. First clone the repository locally to start working on it:
+Now let's find out if this hosting is up-to-snuff. The first thing we do is clone the repository down locally:
 
 ```sh
 $ git clone git@github.com:drmonkeysee/drmonkeysee.github.io.git
 ```
 
-Remember that my repository is named drmonkeysee but yours will be named after your GitHub username. At this point you should have a local repository cloned into a **drmonkeysee.github.io** folder.
-
-Now switch to that folder and create a simple index page:
+Now we switch to that folder and create a simple index page:
 
 ```sh
 $ cd drmonkeysee.github.io
 $ echo "<html><body><h1>Watch this space...</h1></body></html>" > index.html
 ```
 
-Now commit your file and push to the remote origin on GitHub:
+I'm cheating a little here as I actually used vim and created a valid html5 page but that's harder to show in a single `echo` line. I'm sure you can imagine it. Now we commit the file and push to the remote origin on GitHub:
 
 ```sh
 $ git add index.html
@@ -56,8 +56,8 @@ $ git commit -m "Test hosting"
 $ git push
 ```
 
-Now if you open a browser and navigate to `http://drmonkeysee.github.io/` you should see an extremely boring web page! Oh boy!
+Opening a browser and navigating to `http://drmonkeysee.github.io/` we see an extremely boring web page! Times New Roman on a white background, party like it's 1996.
 
 ## Enter Pelican
 
-That was pretty easy but you're gonna hit a wall real fast writing your website with `echo`. Ideally you want to write your pages in a nice text editor using a cleaner syntax than HTML, such as [Markdown](https://daringfireball.net/projects/markdown/) or [reST](http://docutils.sourceforge.net/rst.html). Fortunately static-site generators exist and we will use one of them, Pelican, to do our heavy lifting.
+That was pretty easy but we're gonna hit a wall real fast writing a blog with `echo`. We want to write our pages in a nice text editor like a civilized person. It's the 21st century so we shouldn't need to put up with HTML either, opting for a cleaner syntax like [Markdown](https://daringfireball.net/projects/markdown/) or [reST](http://docutils.sourceforge.net/rst.html). Fortunately static-site generators exist and we will use one of them, Pelican, to do our heavy lifting.
