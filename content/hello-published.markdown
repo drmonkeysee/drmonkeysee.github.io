@@ -2,6 +2,7 @@ Title: Hello Published!
 Category: blog
 Tags: pelican, blogging
 Summary: Hey look! Published!
+Date: 2015-12-04
 
 After fiddling with lots of settings and url schemes publishing was **super** easy! Turns out the current version of Pelican (3.6.3 as of this writing) auto-generates github page scripts so one `make github` call later and \*POOF\* my dev log is a real boy.
 
