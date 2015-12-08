@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Pelican blog setup</title>
+        <title>Hello Published!</title>
         <link rel="stylesheet" href="http://drmonkeysee.github.io/theme/css/main.css" />
         <link href="http://drmonkeysee.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Dev Log and also other Blog Stuff too Atom Feed" />
 
@@ -24,15 +24,15 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="http://drmonkeysee.github.io/drafts/set-up-pelican-blog.html" rel="bookmark"
-           title="Permalink to Pelican blog setup">Pelican blog setup</a></h1>
+        <a href="http://drmonkeysee.github.io/blog/2015/12/04/hello-published" rel="bookmark"
+           title="Permalink to Hello Published!">Hello Published!</a></h1>
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="drmonkeysee">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-12-05T19:11:44-08:00">
-                Published: Sat 05 December 2015
+        <abbr class="published" title="2015-12-04T00:00:00-08:00">
+                Published: Fri 04 December 2015
         </abbr>
 
         <address class="vcard author">
@@ -40,23 +40,14 @@
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
-</footer><!-- /.post-info -->      <h1>Outline</h1>
-<ul>
-<li>set up github page repo</li>
-<li>install pelican and run quickstart</li>
-<li>helpful blog posts</li>
-<li>run through settings<ul>
-<li>url structure</li>
-<li>author name</li>
-<li>date generation and other defaults</li>
-<li>issue with default metadata</li>
-<li>timezone</li>
-</ul>
-</li>
-<li>themes</li>
-<li>plugins</li>
-<li>license</li>
-</ul>
+</footer><!-- /.post-info -->      <p>After fiddling with lots of settings and url schemes publishing was <strong>super</strong> easy! Turns out the current version of Pelican (3.6.3 as of this writing) auto-generates github page scripts so one <code>make github</code> call later and *POOF* my dev log is a real boy.</p>
+<p>At the moment I'm still running on the built-in theme so I to need fix that. You may notice the author link doesn't go anywhere. I'm the only author but the theme is stubbornly insisting on linking to it anyway. I gotta do some other spicing up like a fancy favicon or something.</p>
+<p>As for plugins, hopefully there's something that sets meta tags. All the cool kids have meta tags these days. And GitHub-style code blocks. Oh, looks like the default settings already have that:</p>
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;a fancy blog&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Also I haven't picked a license yet so... uh... no one steal anything in the meantime! Next step: make this blog post obsolete by changing everything about how the blog works.</p>
     </div><!-- /.entry-content -->
 
   </article>
