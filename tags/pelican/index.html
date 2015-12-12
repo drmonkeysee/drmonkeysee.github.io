@@ -23,7 +23,94 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping">Theme Shopping</a></h1>
+                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/11/setup-pelican-blog">Pelican blog setup</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-12-11T22:01:23-08:00">
+                Published: Fri 11 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
+        </address>
+<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
+<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
+</footer><!-- /.post-info --><p>How did I set up this blog? Let's find out.</p>
+<p>First, I followed a <a href="http://mathamy.com/migrating-to-github-pages-using-pelican.html">couple</a> <a href="http://ntanjerome.org/blog/how-to-setup-github-user-page-with-pelican/">handy</a> <a href="https://fedoramagazine.org/make-github-pages-blog-with-pelican/">guides</a>. I encourage everyone to go check them out, but I found they were slightly out of date with the latest version of Pelican so I'll document my own setup process here. Maybe someday this too will be a handy guide.</p>
+<h2>Hosting on GitHub Pages</h2>
+<p>I already have a GitHub account so it's a natural fit to host my blog on GitHub Pages, especially given this is primarily about stuff in said GitHub account. GitHub Pages provides a location to host a static site. The emphasis is on <em>static</em> site; there is no server-side framework so my blog must be made up of HTML, CSS, and JavaScript files. Which is just fine by me. I have a lot of experience with server-side web frameworks and there's very little reason why a blog needs that horsepower (I'm sure the people at <a href="http://www.squarespace.com">Squarespace</a> are very nice). Also hosting on GitHub Pages allows me to write and publish with the same programming workflow I'm already used to instead of relying on a weird web editor or something. A static site generator will fit the bill nicely but we'll get to that later.</p>
+<p>Starting at my <a href="https://github.com">GitHub</a> account I head over to the <a href="https://pages.github.com">GitHub Pages documentation</a> and follow the instructions to set up a "User or organization site". At the end of it I have a new repository: <code>drmonkeysee.github.io</code>.</p>
+<h2>Does the hosting work?</h2>
+<p>Let's find out if this hosting is up-to-snuff. First thing, clone the repository locally and create a simple index page:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git clone git@github.com:drmonkeysee/drmonkeysee.github.io.git
+<span class="nv">$ </span><span class="nb">cd </span>drmonkeysee.github.io
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Watch this space...&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span> &gt; index.html
+</pre></div>
+
+
+<p>I'm cheating a little here as I actually used vim to create a valid HTML5 page but that's harder to show than a single <code>echo</code> line. I'm sure you can imagine it. Now we commit the file and push to the remote origin on GitHub:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git add index.html
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;Test hosting&quot;</span>
+<span class="nv">$ </span>git push
+</pre></div>
+
+
+<p>Opening a browser and navigating to <code>http://drmonkeysee.github.io/</code> we see a live site. Times New Roman on a white background, party like it's 1996!</p>
+<h2>Enter Pelican</h2>
+<p>That was pretty easy but we're gonna hit a wall real fast writing a blog with <code>echo</code>. We want to compose our entries in a nice text editor like a civilized person. It's the 21st century so we shouldn't need to put up with HTML either, opting for a cleaner syntax like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> or <a href="http://docutils.sourceforge.net/rst.html">reST</a>. Static-site generators will do the heavy lifting for us. GitHub Pages recommends <a href="http://jekyllrb.com">Jekyll</a> but I'm gonna use <a href="http://docs.getpelican.com/en/3.6.3/">Pelican</a> as I like Python more than Ruby.</p>
+<p>Our site will be hosted from the <code>master</code> branch. Anything that's not part of our site therefore needs to live in a different branch, otherwise source code, configuration files, readmes, what-have-you will all be served to the public web. That would be a mess. So we'll create a <code>source</code> branch for our development environment.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git checkout -b <span class="nb">source</span>
+</pre></div>
+
+
+<p>Everything we write including Pelican-related code, blog entry text files, and themes will live in the <code>source</code> branch and the auto-generated output of Pelican will live in the <code>master</code> branch. As we will see, Pelican makes this super easy. Some of the handy guides suggest keeping the blog source code in a separate repository and only putting deployed site content into the blog repo, or creating a third branch, <code>gh-pages</code>, that would temporarily contain the published content before merging to <code>master</code>. This was probably a reasonable approach with earlier versions of Pelican but these days it supports publishing from an arbitrary branch so we can keep things nice and simple.</p>
+<p>I already have Python 3.5 installed (don't let anyone tell you to settle for 2.7) so we can jump right into setting up Pelican. To keep things tidy we'll create a <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">virtual environment</a>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>pyvenv venv
+<span class="nv">$ </span><span class="nb">source </span>venv/bin/activate
+<span class="nv">$ </span>pip install pelican Markdown ghp-import
+</pre></div>
+
+
+<p>This installs pelican for obvious reasons, markdown so we can write blog posts in markdown, and ghp-import so we can publish to GitHub Pages. The next step is run the quickstart script:</p>
+<div class="highlight"><pre><span class="nv">$ </span>pelican-quickstart
+...
+&gt; Where <span class="k">do</span> you want to create your new web site? <span class="o">[</span>.<span class="o">]</span> 
+&gt; What will be the title of this web site? Dev Log and also other Blog Stuff too
+&gt; Who will be the author of this web site? Brandon Stansbury
+&gt; What will be the default language of this web site? <span class="o">[</span>en<span class="o">]</span> 
+&gt; Do you want to specify a URL prefix? e.g., http://example.com   <span class="o">(</span>Y/n<span class="o">)</span> 
+&gt; What is your URL prefix? <span class="o">(</span>see above example<span class="p">;</span> no trailing slash<span class="o">)</span> http://drmonkeysee.github.io       
+&gt; Do you want to <span class="nb">enable </span>article pagination? <span class="o">(</span>Y/n<span class="o">)</span>  
+&gt; How many articles per page <span class="k">do</span> you want? <span class="o">[</span>10<span class="o">]</span> 
+&gt; What is your <span class="nb">time </span>zone? <span class="o">[</span>Europe/Paris<span class="o">]</span> America/Los_Angeles
+&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? <span class="o">(</span>Y/n<span class="o">)</span> 
+&gt; Do you want an auto-reload <span class="p">&amp;</span> simpleHTTP script to assist with theme and site development? <span class="o">(</span>Y/n<span class="o">)</span> 
+&gt; Do you want to upload your website using FTP? <span class="o">(</span>y/N<span class="o">)</span> 
+&gt; Do you want to upload your website using SSH? <span class="o">(</span>y/N<span class="o">)</span> 
+&gt; Do you want to upload your website using Dropbox? <span class="o">(</span>y/N<span class="o">)</span> 
+&gt; Do you want to upload your website using S3? <span class="o">(</span>y/N<span class="o">)</span> 
+&gt; Do you want to upload your website using Rackspace Cloud Files? <span class="o">(</span>y/N<span class="o">)</span> 
+&gt; Do you want to upload your website using GitHub Pages? <span class="o">(</span>y/N<span class="o">)</span> y
+&gt; Is this your personal page <span class="o">(</span>username.github.io<span class="o">)</span>? <span class="o">(</span>y/N<span class="o">)</span> y
+</pre></div>
+
+
+<p>Pelican creates a bunch of files and we're ready to rock. The questions are pretty straightforward but note that I've asked for a Fabfile/Makefile and an auto-reload script. The combination of the two allows us to run several handy Pelican commands including local hosting for development and publishing to our remote master branch.</p>
+<p>Time zone stymied me for a moment. Like any good developer I have a sextant and stable pendulum so I know what time zone I'm in but it was unclear what format Pelican expected. Is it PST? US/Pacific? What if I get it wrong? Turns out this ends up in a config file so it's easy to fix later but Pelican is expecting the tz  name listed in <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">this table</a>. Now you know.</p>
+<p>So we have an empty Pelican site and a bunch of auto-generated scripts. Head over to the <a href="https://github.com/github/gitignore">gitignore repo</a>, grab the Python template, add <strong>venv/</strong> and <strong>output/</strong> to the ignore list, and commit everything into the <code>source</code> branch. Now we write a hello world post, get bored, and never write anything again!</p>
+<p>Next time we'll tackle writing and publishing the first blog entry, as well as blog configuration.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping" rel="bookmark"
+                           title="Permalink to Theme Shopping">Theme Shopping</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-05T20:47:19-08:00">
                 Published: Sat 05 December 2015
@@ -34,15 +121,10 @@
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
-</footer><!-- /.post-info --><p>I've settled on a url scheme and other random settings so the time has come to shop for a theme. I popped over to <a href="https://github.com/getpelican/pelican-themes">pelican-themes</a> and... frankly... not crazy about what's on offer.</p>
-<p>Don't get me wrong, the craftsmanship on display is fine, but none of them grab me. However the pelican-bootstrap3 theme points a way forward. What if I just built my own theme on top of bootstrap? Follow up question: why don't I just use pelican-bootstrap3?</p>
-<p>In short: I want control. The pelican-bootstrap3 theme contains the contents of bootstrap3 inline instead of pulling it in from a CDN, which adds a maintenance burden keeping everything up-to-date with official release channels. I'm one of those devs that likes to sit on the latest versions as seamlessly as possible and cleaning up someone else's theme to square it away to my satisfaction sounds less fun than just writing it myself.</p>
-<p>So why not? Well it means this blog is gonna look pretty entry-level for longer than I wanted. On the other hand I control the blog from the ground up and might as well learn <a href="http://jinja.pocoo.org">Jinja</a> while I'm here. As will become evident in later entries much of my hobby work is about building stuff from scratch so carrying that philosophy forward to my dev log seems a natural fit.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>A trip to the theme emporium</p>
+                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
