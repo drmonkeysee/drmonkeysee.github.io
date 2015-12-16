@@ -23,7 +23,103 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/11/setup-pelican-blog">Pelican blog setup</a></h1>
+                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/15/publish-pelican-blog">Pelican blog publishing</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2015-12-15T22:01:18-08:00">
+                Published: Tue 15 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
+        </address>
+<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
+<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
+</footer><!-- /.post-info --><p>I've got a newly minted Pelican site but I haven't produced anything yet. To find out how that happened go read <a href="http://drmonkeysee.github.io/blog/2015/12/11/setup-pelican-blog">this post</a>. Now what? Well I'm not going to detail exactly how I've carefully crafted every blog post because who cares?? You do you. I <em>will</em> point out some notable considerations that went into putting the blog together.</p>
+<h2>Files Files Files</h2>
+<p>Pelican generated a bunch of files and folders. Here's a quick overview:</p>
+<ul>
+<li><strong>Makefile</strong>/<strong>fabfile.py</strong> and <strong>develop_server.sh</strong>: automation scripts for local hosting, publishing, and site generation</li>
+<li><strong>pelicanconf.py</strong> and <strong>publishconf.py</strong>: configuration files for Pelican</li>
+<li><strong>content/</strong>: content folder is where all blog posts go; subfolders can contain special content like images, about pages, pdfs, tax forms, whatever</li>
+<li><strong>output/</strong>: Pelican's output folder, everything it generates automatically goes in here which is why we added it to the .gitignore file last time</li>
+</ul>
+<p>When Pelican builds the site it combines everything in <strong>content/</strong> with the settings defined in the <strong>.py</strong> files, along with any themes and plugins, and spits out static site files to <strong>output/</strong>.</p>
+<h2>Get It Running!</h2>
+<p>Before I can figure out what I want I need to find out what I have. Instead of fiddling with configuration let's get something running. Reading over the documentation I know that all content files have metadata that tells Pelican various things about how the file should be generated so using an example from <a href="https://github.com/eevee/eev.ee">eevee's blog source</a> I slap together a simple <strong>content/hello-world.markdown</strong> file:</p>
+<div class="highlight"><pre><span class="n">Title</span><span class="o">:</span> <span class="n">Hello</span> <span class="n">World</span>
+<span class="n">Category</span><span class="o">:</span> <span class="n">blog</span>
+<span class="n">Tags</span><span class="o">:</span> <span class="n">pelican</span><span class="o">,</span> <span class="n">blogging</span>
+<span class="n">Summary</span><span class="o">:</span> <span class="n">Obligatory</span> <span class="n">hello</span> <span class="n">world</span> <span class="n">post</span>
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2015</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">04</span>
+
+<span class="n">test</span> <span class="n">test</span> <span class="n">test</span>
+</pre></div>
+
+
+<p>I don't recall exactly what I put in there but close enough. Now that I have something to look at in a browser I can use the handy <strong>Makefile</strong>. <code>make help</code> lists all the commands but the one we care about is <code>make devserver</code>. This does several things:</p>
+<ol>
+<li>Compile the site into <strong>output/</strong></li>
+<li>Launch a local webserver on localhost:8000</li>
+<li>Monitor changes to content and configuration files and regenerate the site</li>
+</ol>
+<p>Well, three things. Now I can work entirely in the text editor and immediately see changes in a browser every time I save. To stop it we can run <code>make stopserver</code>. Time to start futzing with settings.</p>
+<h2>Configuration</h2>
+<p><strong>pelicanconf.py</strong> is your friend. It tells Pelican all kinds of things about how to organize and build the HTML and I spent quite a bit of time in here before writing anything approaching a publishable post. This file was built from the answers to <strong>pelican-quickstart</strong> so there shouldn't be many surprises. A lot of the information in here informs the theme engine so what Pelican does with it depends on the specifics of the templates.</p>
+<p>I fill out various social network fields including GitHub, Twitter, and Email because I guess I like spam. I turn <code>RELATIVE_URLS</code> on for local development and move the <code>SITEURL</code> field from <strong>publishconf.py</strong> so it's available during development. <strong>publishconf.py</strong> overrides <strong>pelicanconf.py</strong> settings for the publish action and other than that one change it's fine as is.</p>
+<h3>Metadata</h3>
+<p>Pelican reads a bunch of metadata fields from the top of a blog file to determine various things like title, publish date, tags, etc (see example above). Looking at various examples out there I find that most authors are putting dates explicitly in the metadata but that seems awfully fussy. What if I forget to change the date when I actually publish? Or I fat finger it?</p>
+<p>Fortunately setting <code>DEFAULT_DATE = 'fs'</code> tells Pelican to figure out publish date from the file system. Most of the time this is what I want and if not I can override in the file directly. Problem solved.</p>
+<p>The slug, by default, comes from the title but sometimes I may want a fancier title than I want in the url. Setting <code>SLUGIFY_SOURCE = 'basename'</code> pulls the slug from the name of the file <em>sans</em> extension. Alright. Looks good.</p>
+<p>Blog entries should be considered drafts until I'm ready to publish. There's another field <code>Status: draft</code> that is awfully handy. The documentation claims that this field can be set in <strong>pelicanconf.py</strong> to set the default to draft (via <code>DEFAULT_METADATA</code>) but I found it to be really flaky. Sometimes it would make all files drafts, sometimes all files would be published, and sometimes it would do what the file metadata said. It would rotate between these outcomes randomly every time I generated the site, so I abandoned that setting and will have to mark every entry as a draft manually. Oh well.</p>
+<p>That's mostly it for metadata and general settings. But there's one final detail.</p>
+<h3>Urls</h3>
+<p>Url structure is important. It's a user-facing feature, in the parlance of product management. Ugly urls are easy enough to come by these days but any site that's designed for <em>reading</em> looks a lot nicer if the address bar reflects what it is you're looking at.</p>
+<p>Pelican has a whole slew of settings for generating urls for different parts of the site but the most relevant one here is <code>ARTICLE_URL</code>. There's a mini-language to construct url templates that will then dictate the file names and folder structure of the published site. I think by default the title is used as the slug so a blog entry titled "Hello World" will generate a url like <code>/hello-world.html</code>.</p>
+<p>Common fashion these days says that's enough (except the .html extension which we'll get to). The competing format most often seen is including the date in the url. I went back and forth on this quite a bit. Title alone was tempting as it looks so clean. Ultimately I decided to go with date in the url because none of these blog entries really stand alone like they would on, say, <a href="https://medium.com/top-stories">Medium</a>. When an entry appears in time is important to understanding the site. So dated urls it is.</p>
+<p>However those pesky file extensions are really passé. Pelican makes a distinction between the url and the file it writes to disk. Since most web servers have the notion of a default page for a folder we can use that trick to create extensionless urls with static files. The key is simply to set the <code>ARTICLE_URL</code> field as <code>{url-template}</code> and <code>ARTICLE_SAVE_AS</code> field as <code>{url-template}/index.html</code>.</p>
+<p>The index file will be treated as the default content and the url will simply reflect the name of the folder. Thus a file <strong>hello-world.markdown</strong> will be written to <strong>hello-world/index.html</strong> which will look like <code>/hello-world</code> in the browser (technically <code>/hello-world/index.html</code> will also work in the browser but Pelican will generate links to the former). We can do that for all the other <code>*URL</code> and <code>*SAVE_AS</code> fields for consistency across the site. Fancy!</p>
+<p>Put it all together and the article url settings are:</p>
+<div class="highlight"><pre><span class="n">ARTICLE_URL</span> <span class="o">=</span> <span class="s">&#39;{category}/{date:%Y}/{date:%m}/{date:</span><span class="si">%d</span><span class="s">}/{slug}&#39;</span>
+<span class="n">ARTICLE_SAVE_AS</span> <span class="o">=</span> <span class="s">&#39;{category}/{date:%Y}/{date:%m}/{date:</span><span class="si">%d</span><span class="s">}/{slug}/index.html&#39;</span>
+</pre></div>
+
+
+<p>I included category as well so the full link includes the "blog" subfolder in case I have other groups of content in the future.</p>
+<p>Finally I blank out the <code>AUTHOR</code> fields since there's no need to generate those pages. I'm not hiring contributors!</p>
+<h2>Publishing</h2>
+<p>I've got a blog post. I've set various configuration settings. Let's do this thing.</p>
+<p>The Makefile Pelican created includes a <code>github</code> target that does... everything. Once a blog post is ready to go I run <code>make github</code> and it all magically happens. To be more specific it:</p>
+<ol>
+<li>Deletes the <strong>output/</strong> folder</li>
+<li>Generates new HTML into the <strong>output/</strong> folder</li>
+<li>Uses the ghp-import package to copy the <strong>output/</strong> folder into the root folder of the <code>master</code> branch</li>
+<li>Push <code>master</code> to origin on GitHub</li>
+</ol>
+<p>Boom! Done! Our active development branch will remain <code>source</code>, ghp-import wholly owns <code>master</code> now, and never the two shall meet.</p>
+<h2>In Summation</h2>
+<p>Everything's set up and now the workflow is very simple: create new blog post files in <strong>content/</strong>, unmark them as drafts when they're ready to publish, and run <code>make github</code> to get them out to the world. That's pretty much it. Static sites are awesome!</p>
+<p>I do have a few things left before I consider this blog ready:</p>
+<ul>
+<li>come up with a custom theme</li>
+<li>clarify licenses for the software and site content</li>
+<li>slap google analytics on the site 'cuz why not</li>
+<li>add non-blog pages like about me or whatever who knows</li>
+<li>the devserver is fond of reminding me I have no favicon yet</li>
+</ul>
+<p>I've just touched on some notable points of my experience getting this blog up and running; Pelican itself has <a href="http://docs.getpelican.com/en/3.6.3/index.html">extensive documentation</a> if you need more detail. Additionally there's a whole galaxy of themes and plugins I haven't mentioned at all. All of this code is up on <a href="https://github.com/drmonkeysee/drmonkeysee.github.io/tree/source">my GitHub account</a> if you need specifics on how I've configured the site or structured the post files. Any questions not otherwise answered? Hit me up on <a href="https://twitter.com/drmonkeysee">Twitter</a>!</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/11/setup-pelican-blog" rel="bookmark"
+                           title="Permalink to Pelican blog setup">Pelican blog setup</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-11T22:01:23-08:00">
                 Published: Fri 11 December 2015
@@ -34,75 +130,10 @@
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
-</footer><!-- /.post-info --><p>How did I set up this blog? Let's find out.</p>
-<p>First, I followed a <a href="http://mathamy.com/migrating-to-github-pages-using-pelican.html">couple</a> <a href="http://ntanjerome.org/blog/how-to-setup-github-user-page-with-pelican/">handy</a> <a href="https://fedoramagazine.org/make-github-pages-blog-with-pelican/">guides</a>. I encourage everyone to go check them out, but I found they were slightly out of date with the latest version of Pelican so I'll document my own setup process here. Maybe someday this too will be a handy guide.</p>
-<h2>Hosting on GitHub Pages</h2>
-<p>I already have a GitHub account so it's a natural fit to host my blog on GitHub Pages, especially given this is primarily about stuff in said GitHub account. GitHub Pages provides a location to host a static site. The emphasis is on <em>static</em> site; there is no server-side framework so my blog must be made up of HTML, CSS, and JavaScript files. Which is just fine by me. I have a lot of experience with server-side web frameworks and there's very little reason why a blog needs that horsepower (I'm sure the people at <a href="http://www.squarespace.com">Squarespace</a> are very nice). Also hosting on GitHub Pages allows me to write and publish with the same programming workflow I'm already used to instead of relying on a weird web editor or something. A static site generator will fit the bill nicely but we'll get to that later.</p>
-<p>Starting at my <a href="https://github.com">GitHub</a> account I head over to the <a href="https://pages.github.com">GitHub Pages documentation</a> and follow the instructions to set up a "User or organization site". At the end of it I have a new repository: <code>drmonkeysee.github.io</code>.</p>
-<h2>Does the hosting work?</h2>
-<p>Let's find out if this hosting is up-to-snuff. First thing, clone the repository locally and create a simple index page:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git clone git@github.com:drmonkeysee/drmonkeysee.github.io.git
-<span class="nv">$ </span><span class="nb">cd </span>drmonkeysee.github.io
-<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Watch this space...&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span> &gt; index.html
-</pre></div>
-
-
-<p>I'm cheating a little here as I actually used vim to create a valid HTML5 page but that's harder to show than a single <code>echo</code> line. I'm sure you can imagine it. Now we commit the file and push to the remote origin on GitHub:</p>
-<div class="highlight"><pre><span class="nv">$ </span>git add index.html
-<span class="nv">$ </span>git commit -m <span class="s2">&quot;Test hosting&quot;</span>
-<span class="nv">$ </span>git push
-</pre></div>
-
-
-<p>Opening a browser and navigating to <code>http://drmonkeysee.github.io/</code> we see a live site. Times New Roman on a white background, party like it's 1996!</p>
-<h2>Enter Pelican</h2>
-<p>That was pretty easy but we're gonna hit a wall real fast writing a blog with <code>echo</code>. We want to compose our entries in a nice text editor like a civilized person. It's the 21st century so we shouldn't need to put up with HTML either, opting for a cleaner syntax like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> or <a href="http://docutils.sourceforge.net/rst.html">reST</a>. Static-site generators will do the heavy lifting for us. GitHub Pages recommends <a href="http://jekyllrb.com">Jekyll</a> but I'm gonna use <a href="http://docs.getpelican.com/en/3.6.3/">Pelican</a> as I like Python more than Ruby.</p>
-<p>Our site will be hosted from the <code>master</code> branch. Anything that's not part of our site therefore needs to live in a different branch, otherwise source code, configuration files, readmes, what-have-you will all be served to the public web. That would be a mess. So we'll create a <code>source</code> branch for our development environment.</p>
-<div class="highlight"><pre><span class="nv">$ </span>git checkout -b <span class="nb">source</span>
-</pre></div>
-
-
-<p>Everything we write including Pelican-related code, blog entry text files, and themes will live in the <code>source</code> branch and the auto-generated output of Pelican will live in the <code>master</code> branch. As we will see, Pelican makes this super easy. Some of the handy guides suggest keeping the blog source code in a separate repository and only putting deployed site content into the blog repo, or creating a third branch, <code>gh-pages</code>, that would temporarily contain the published content before merging to <code>master</code>. This was probably a reasonable approach with earlier versions of Pelican but these days it supports publishing from an arbitrary branch so we can keep things nice and simple.</p>
-<p>I already have Python 3.5 installed (don't let anyone tell you to settle for 2.7) so we can jump right into setting up Pelican. To keep things tidy we'll create a <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">virtual environment</a>:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pyvenv venv
-<span class="nv">$ </span><span class="nb">source </span>venv/bin/activate
-<span class="nv">$ </span>pip install pelican Markdown ghp-import
-</pre></div>
-
-
-<p>This installs pelican for obvious reasons, markdown so we can write blog posts in markdown, and ghp-import so we can publish to GitHub Pages. The next step is run the quickstart script:</p>
-<div class="highlight"><pre><span class="nv">$ </span>pelican-quickstart
-...
-&gt; Where <span class="k">do</span> you want to create your new web site? <span class="o">[</span>.<span class="o">]</span> 
-&gt; What will be the title of this web site? Dev Log and also other Blog Stuff too
-&gt; Who will be the author of this web site? Brandon Stansbury
-&gt; What will be the default language of this web site? <span class="o">[</span>en<span class="o">]</span> 
-&gt; Do you want to specify a URL prefix? e.g., http://example.com   <span class="o">(</span>Y/n<span class="o">)</span> 
-&gt; What is your URL prefix? <span class="o">(</span>see above example<span class="p">;</span> no trailing slash<span class="o">)</span> http://drmonkeysee.github.io       
-&gt; Do you want to <span class="nb">enable </span>article pagination? <span class="o">(</span>Y/n<span class="o">)</span>  
-&gt; How many articles per page <span class="k">do</span> you want? <span class="o">[</span>10<span class="o">]</span> 
-&gt; What is your <span class="nb">time </span>zone? <span class="o">[</span>Europe/Paris<span class="o">]</span> America/Los_Angeles
-&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? <span class="o">(</span>Y/n<span class="o">)</span> 
-&gt; Do you want an auto-reload <span class="p">&amp;</span> simpleHTTP script to assist with theme and site development? <span class="o">(</span>Y/n<span class="o">)</span> 
-&gt; Do you want to upload your website using FTP? <span class="o">(</span>y/N<span class="o">)</span> 
-&gt; Do you want to upload your website using SSH? <span class="o">(</span>y/N<span class="o">)</span> 
-&gt; Do you want to upload your website using Dropbox? <span class="o">(</span>y/N<span class="o">)</span> 
-&gt; Do you want to upload your website using S3? <span class="o">(</span>y/N<span class="o">)</span> 
-&gt; Do you want to upload your website using Rackspace Cloud Files? <span class="o">(</span>y/N<span class="o">)</span> 
-&gt; Do you want to upload your website using GitHub Pages? <span class="o">(</span>y/N<span class="o">)</span> y
-&gt; Is this your personal page <span class="o">(</span>username.github.io<span class="o">)</span>? <span class="o">(</span>y/N<span class="o">)</span> y
-</pre></div>
-
-
-<p>Pelican creates a bunch of files and we're ready to rock. The questions are pretty straightforward but note that I've asked for a Fabfile/Makefile and an auto-reload script. The combination of the two allows us to run several handy Pelican commands including local hosting for development and publishing to our remote master branch.</p>
-<p>Time zone stymied me for a moment. Like any good developer I have a sextant and stable pendulum so I know what time zone I'm in but it was unclear what format Pelican expected. Is it PST? US/Pacific? What if I get it wrong? Turns out this ends up in a config file so it's easy to fix later but Pelican is expecting the tz  name listed in <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">this table</a>. Now you know.</p>
-<p>So we have an empty Pelican site and a bunch of auto-generated scripts. Head over to the <a href="https://github.com/github/gitignore">gitignore repo</a>, grab the Python template, add <strong>venv/</strong> and <strong>output/</strong> to the ignore list, and commit everything into the <code>source</code> branch. Now we write a hello world post, get bored, and never write anything again!</p>
-<p>Next time we'll tackle writing and publishing the first blog entry, as well as blog configuration.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Setting up a blog with Pelican</p>
+                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/11/setup-pelican-blog">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
