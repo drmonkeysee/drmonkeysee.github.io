@@ -1,7 +1,8 @@
 Title: Theme Shopping
 Category: blog
-Tags: pelican, blogging
+Tags: pelican, blogging, theming
 Summary: A trip to the theme emporium
+Date: 2015-12-05
 
 I've settled on a url scheme and other random settings so the time has come to shop for a theme. I popped over to [pelican-themes](https://github.com/getpelican/pelican-themes) and... frankly... not crazy about what's on offer.
 
