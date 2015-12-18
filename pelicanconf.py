@@ -29,7 +29,7 @@ SOCIAL = (('Twitter', 'https://twitter.com/drmonkeysee'),
 GITHUB_URL = 'https://github.com/drmonkeysee'
 TWITTER_USERNAME = 'drmonkeysee'
 DEFAULT_PAGINATION = 10
-THEME = 'notmyidea'
+THEME = 'themes/drmonkeysee-bootstrap'
 DISPLAY_CATEGORIES_ON_MENU = False
 RELATIVE_URLS = True
 
