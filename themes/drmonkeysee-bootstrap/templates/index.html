@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+    <meta name="description" content="Home page of Dr Monkeysee's Dev Log">
+    <meta property="og:title" content="{{ SITENAME }}">
+    <meta property="og:type" content="website">
+{% endblock metatags %}
+
+{% block title %}{{ super() }} - Home{% endblock title %}
+
+{% block content %}
+    <h1>Foobar</h1>
+{% endblock content %}

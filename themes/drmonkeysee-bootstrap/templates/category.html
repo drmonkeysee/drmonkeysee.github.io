@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+    <meta name="description" content="All {{ category }} entries">
+    <meta property="og:title" content="{{ SITENAME }} - {{ category|title }}">
+    <meta property="og:type" content="website">
+{% endblock metatags %}
+
+{% block links %}
+    {% if CATEGORY_FEED_ATOM %}
+    <link href="{{ CATEGORY_FEED_ATOM|format(category) }}" rel="alternate" type="application/atom+xml" title="{{ category|title }} Atom Feed">
+    {% endif %}
+{% endblock links %}
+
+{% block title %}{{ super() }} - {{ category|title }}{% endblock title %}
