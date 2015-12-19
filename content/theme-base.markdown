@@ -1,10 +1,10 @@
-Title: Theme Outline
+Title: Theme Base Design
 Category: blog
 Tags: pelican, blogging, theming
-Summary: Outlining the blog's theme
+Summary: Building a theme: the basics
 Status: draft
 
-The first step for my custom theme is figure out all the stuff you *don't* see: meta tags, feeds, and styling frameworks. As mentioned in an [earlier post]({filename}/theme-shopping.markdown) I'm going to base my theme on [Bootstrap](http://getbootstrap.com). It's not clear to me if I want to pull in [Font Awesome](http://fontawesome.io), although the icon list looks very promising. I do know I don't want to write something from the ground-up. I don't particularly enjoy endlessly tweaking CSS and that will be my entire life if I start with a blank canvas.
+The first step for my custom theme is figuring out all the stuff you *don't* see: meta tags, feeds, and styling frameworks. In other words, the `<head>` section. As mentioned in an [earlier post]({filename}/theme-shopping.markdown) I'm going to base my theme on [Bootstrap](http://getbootstrap.com). It's not clear to me if I want to pull in [Font Awesome](http://fontawesome.io), although the icon list looks very promising. I do know I don't want to write something from the ground-up. I don't particularly enjoy endlessly tweaking CSS and that will be my entire life if I start with a blank canvas.
 
 I'll be following closely the [theme documentation](http://docs.getpelican.com/en/3.6.3/themes.html) for Pelican as well as referencing various repos for examples. The first thing I need is **base.html** to define the basic skeleton of every page, which conveniently is where the tags I'm discussing here will live.
 
