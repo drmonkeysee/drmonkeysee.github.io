@@ -1,8 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ DEFAULT_LANG }}">
   <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="{{ AUTHOR }}">
+    <meta name="subject" content="Dr Monkeysee's Dev Log">
+    {% block metatags %}
+    {% endblock metatags %}
+    <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+    {% if FEED_ALL_ATOM %}
+    <link href="{{ FEED_ALL_ATOM }}" rel="alternate" type="application/atom+xml" title="Everything Atom Feed">
+    {% endif %}
+    {% block links %}
+    {% endblock links %}
   </head>
   <body>
+    {% block content %}
+    {% endblock content %}
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
   </body>
 </html>
