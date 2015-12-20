@@ -23,90 +23,104 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/15/publish-pelican-blog">Pelican blog publishing</a></h1>
+                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/19/theme-base">Theme Base Design</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2015-12-15T22:01:18-08:00">
-                Published: Tue 15 December 2015
+        <abbr class="published" title="2015-12-19T19:52:16-08:00">
+                Published: Sat 19 December 2015
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
-<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
-</footer><!-- /.post-info --><p>I've got a newly minted Pelican site but I haven't produced anything yet. To find out how that happened go read <a href="http://drmonkeysee.github.io/blog/2015/12/11/setup-pelican-blog">this post</a>. Now what? Well I'm not going to detail exactly how I've carefully crafted every blog post because who cares?? You do you. I <em>will</em> point out some notable considerations that went into putting the blog together.</p>
-<h2>Files Files Files</h2>
-<p>Pelican generated a bunch of files and folders. Here's a quick overview:</p>
+<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> <a href="http://drmonkeysee.github.io/tags/theming">theming</a> </p>
+</footer><!-- /.post-info --><p>The first step for my custom theme is designing the basic structure of every page, placed in <strong>base.html</strong>. I decided the first step of <em>that</em> process is making the machines happy. Picking out the meta tags, feed links, title, doctype, and all the other tags that no one sees but tells various computers what's going on.</p>
+<p>Layout and other visual elements will come later, though I've already decided what I'll start with. As mentioned in an <a href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping">earlier post</a> I'm going to base my theme on <a href="http://getbootstrap.com">Bootstrap</a>. It's not clear to me if I want to pull in <a href="http://fontawesome.io">Font Awesome</a>, although the icon list looks very promising. I do know I don't want to write something from the ground-up. I don't particularly enjoy endlessly tweaking CSS and that will be my entire life if I start with a blank canvas.</p>
+<p>I'll be closely following the <a href="http://docs.getpelican.com/en/3.6.3/themes.html">theme documentation</a> for Pelican, the <a href="http://jinja.pocoo.org/docs/dev/templates/">Jinja2 docs</a>, as well as referencing various repos for examples.</p>
+<h2>Styling</h2>
+<p>Grabbing Bootstrap is easy enough. There are CDN links for both <a href="https://www.bootstrapcdn.com">Bootstrap</a> and <a href="https://code.jquery.com">jQuery</a> so those will be the first thing to throw into <strong>base.html</strong>. That way I don't have to pull the files in myself, I can leverage existing browser caches, and I can easily update the frameworks the next time they release.</p>
+<p>As per best practice, CSS goes in the <code>&lt;head&gt;</code> and JavaScript goes at the bottom of the <code>&lt;body&gt;</code>.</p>
+<h2>Meta tags</h2>
+<p>There's a thousand different meta tags out there and it can be difficult to determine exactly what any particular page needs. I'm using <a href="http://code.lancepollard.com/complete-list-of-html-meta-tags/">this list</a> as a handy guide and will be picking-and-choosing as I go. The nice thing about having a reference like this is it brings to my attention elements I wouldn't have thought of otherwise, like the Apple-specific tags, but we can look into those later. To start with we'll add the minimum:</p>
 <ul>
-<li><strong>Makefile</strong>/<strong>fabfile.py</strong> and <strong>develop_server.sh</strong>: automation scripts for local hosting, publishing, and site generation</li>
-<li><strong>pelicanconf.py</strong> and <strong>publishconf.py</strong>: configuration files for Pelican</li>
-<li><strong>content/</strong>: content folder is where all blog posts go; subfolders can contain special content like images, about pages, pdfs, tax forms, whatever</li>
-<li><strong>output/</strong>: Pelican's output folder, everything it generates automatically goes in here which is why we added it to the .gitignore file last time</li>
+<li>charset to be a good web citizen</li>
+<li>author and subject for self-aggrandizement</li>
+<li>the required tags for Bootstrap</li>
 </ul>
-<p>When Pelican builds the site it combines everything in <strong>content/</strong> with the settings defined in the <strong>.py</strong> files, along with any themes and plugins, and spits out static site files to <strong>output/</strong>.</p>
-<h2>Get It Running!</h2>
-<p>Before I can figure out what I want I need to find out what I have. Instead of fiddling with configuration let's get something running. Reading over the documentation I know that all content files have metadata that tells Pelican various things about how the file should be generated so using an example from <a href="https://github.com/eevee/eev.ee">eevee's blog source</a> I slap together a simple <strong>content/hello-world.markdown</strong> file:</p>
-<div class="highlight"><pre><span class="n">Title</span><span class="o">:</span> <span class="n">Hello</span> <span class="n">World</span>
-<span class="n">Category</span><span class="o">:</span> <span class="n">blog</span>
-<span class="n">Tags</span><span class="o">:</span> <span class="n">pelican</span><span class="o">,</span> <span class="n">blogging</span>
-<span class="n">Summary</span><span class="o">:</span> <span class="n">Obligatory</span> <span class="n">hello</span> <span class="n">world</span> <span class="n">post</span>
-<span class="n">Date</span><span class="o">:</span> <span class="mi">2015</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">04</span>
-
-<span class="n">test</span> <span class="n">test</span> <span class="n">test</span>
+<p>In addition there will be content-specific tags that child templates will insert so we'll add a meta tag block to hook into. This includes:</p>
+<ul>
+<li>OpenGraph tags for sharing on Facebook, though it's unclear to me what <code>og:image</code> would be</li>
+<li>let's give Twitter some love as well</li>
+<li>description and keywords</li>
+</ul>
+<p>Those basics give us this for <strong>base.html</strong>:</p>
+<div class="highlight"><pre>    <span class="c">&lt;!-- browsers want this to be the first tag --&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- these two are required by Bootstrap --&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- now I start talking about myself --&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;author&quot;</span> <span class="na">content=</span><span class="s">&quot;{{ AUTHOR }}&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;subject&quot;</span> <span class="na">content=</span><span class="s">&quot;Dr Monkeysee&#39;s Dev Log&quot;</span><span class="nt">&gt;</span>
+    {% block metatags %}
+    {% endblock metatags %}
 </pre></div>
 
 
-<p>I don't recall exactly what I put in there but close enough. Now that I have something to look at in a browser I can use the handy <strong>Makefile</strong>. <code>make help</code> lists all the commands but the one we care about is <code>make devserver</code>. This does several things:</p>
-<ol>
-<li>Compile the site into <strong>output/</strong></li>
-<li>Launch a local webserver on localhost:8000</li>
-<li>Monitor changes to content and configuration files and regenerate the site</li>
-</ol>
-<p>Well, three things. Now I can work entirely in the text editor and immediately see changes in a browser every time I save. To stop it we can run <code>make stopserver</code>. Time to start futzing with settings.</p>
-<h2>Configuration</h2>
-<p><strong>pelicanconf.py</strong> is your friend. It tells Pelican all kinds of things about how to organize and build the HTML and I spent quite a bit of time in here before writing anything approaching a publishable post. This file was built from the answers to <strong>pelican-quickstart</strong> so there shouldn't be many surprises. A lot of the information in here informs the theme engine so what Pelican does with it depends on the specifics of the templates.</p>
-<p>I fill out various social network fields including GitHub, Twitter, and Email because I guess I like spam. I turn <code>RELATIVE_URLS</code> on for local development and move the <code>SITEURL</code> field from <strong>publishconf.py</strong> so it's available during development. <strong>publishconf.py</strong> overrides <strong>pelicanconf.py</strong> settings for the publish action and other than that one change it's fine as is.</p>
-<h3>Metadata</h3>
-<p>Pelican reads a bunch of metadata fields from the top of a blog file to determine various things like title, publish date, tags, etc (see example above). Looking at various examples out there I find that most authors are putting dates explicitly in the metadata but that seems awfully fussy. What if I forget to change the date when I actually publish? Or I fat finger it?</p>
-<p>Fortunately setting <code>DEFAULT_DATE = 'fs'</code> tells Pelican to figure out publish date from the file system. Most of the time this is what I want and if not I can override in the file directly. Problem solved.</p>
-<p>The slug, by default, comes from the title but sometimes I may want a fancier title than I want in the url. Setting <code>SLUGIFY_SOURCE = 'basename'</code> pulls the slug from the name of the file <em>sans</em> extension. Alright. Looks good.</p>
-<p>Blog entries should be considered drafts until I'm ready to publish. There's another field <code>Status: draft</code> that is awfully handy. The documentation claims that this field can be set in <strong>pelicanconf.py</strong> to set the default to draft (via <code>DEFAULT_METADATA</code>) but I found it to be really flaky. Sometimes it would make all files drafts, sometimes all files would be published, and sometimes it would do what the file metadata said. It would rotate between these outcomes randomly every time I generated the site, so I abandoned that setting and will have to mark every entry as a draft manually. Oh well.</p>
-<p>That's mostly it for metadata and general settings. But there's one final detail.</p>
-<h3>Urls</h3>
-<p>Url structure is important. It's a user-facing feature, in the parlance of product management. Ugly urls are easy enough to come by these days but any site that's designed for <em>reading</em> looks a lot nicer if the address bar reflects what it is you're looking at.</p>
-<p>Pelican has a whole slew of settings for generating urls for different parts of the site but the most relevant one here is <code>ARTICLE_URL</code>. There's a mini-language to construct url templates that will then dictate the file names and folder structure of the published site. I think by default the title is used as the slug so a blog entry titled "Hello World" will generate a url like <code>/hello-world.html</code>.</p>
-<p>Common fashion these days says that's enough (except the .html extension which we'll get to). The competing format most often seen is including the date in the url. I went back and forth on this quite a bit. Title alone was tempting as it looks so clean. Ultimately I decided to go with date in the url because none of these blog entries really stand alone like they would on, say, <a href="https://medium.com/top-stories">Medium</a>. When an entry appears in time is important to understanding the site. So dated urls it is.</p>
-<p>However those pesky file extensions are really passé. Pelican makes a distinction between the url and the file it writes to disk. Since most web servers have the notion of a default page for a folder we can use that trick to create extensionless urls with static files. The key is simply to set the <code>ARTICLE_URL</code> field as <code>{url-template}</code> and <code>ARTICLE_SAVE_AS</code> field as <code>{url-template}/index.html</code>.</p>
-<p>The index file will be treated as the default content and the url will simply reflect the name of the folder. Thus a file <strong>hello-world.markdown</strong> will be written to <strong>hello-world/index.html</strong> which will look like <code>/hello-world</code> in the browser (technically <code>/hello-world/index.html</code> will also work in the browser but Pelican will generate links to the former). We can do that for all the other <code>*URL</code> and <code>*SAVE_AS</code> fields for consistency across the site. Fancy!</p>
-<p>Put it all together and the article url settings are:</p>
-<div class="highlight"><pre><span class="n">ARTICLE_URL</span> <span class="o">=</span> <span class="s">&#39;{category}/{date:%Y}/{date:%m}/{date:</span><span class="si">%d</span><span class="s">}/{slug}&#39;</span>
-<span class="n">ARTICLE_SAVE_AS</span> <span class="o">=</span> <span class="s">&#39;{category}/{date:%Y}/{date:%m}/{date:</span><span class="si">%d</span><span class="s">}/{slug}/index.html&#39;</span>
+<h2>Feeds</h2>
+<p>By default Pelican generates ATOM feeds for the main page and each category. Feeds can be generated for other pages like tags, as well as RSS variants for everything, but I don't see the need for it. The other pages won't be interesting in a temporal sense and anything that can read RSS today can also read ATOM.</p>
+<p>The everything feed will go in <strong>base.html</strong> and the category-specific feed link will go in <strong>category.html</strong>. Doing this avoids lots of extra conditional logic found in most examples.</p>
+<p>Throwing together a quick-and-dirty <strong>category.html</strong> lets me test whether the feed insertion is working. <strong>base.html</strong> and <strong>category.html</strong> together gives us:</p>
+<div class="highlight"><pre><span class="c">&lt;!-- base.html --&gt;</span>
+    {% if FEED_ALL_ATOM %}
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;{{ FEED_ALL_ATOM }}&quot;</span> <span class="na">rel=</span><span class="s">&quot;alternate&quot;</span> <span class="na">type=</span><span class="s">&quot;application/atom+xml&quot;</span> <span class="na">title=</span><span class="s">&quot;Everything Atom Feed&quot;</span><span class="nt">&gt;</span>
+    {% endif %}
+    {% block links %}
+    {% endblock links %}
 </pre></div>
 
 
-<p>I included category as well so the full link includes the "blog" subfolder in case I have other groups of content in the future.</p>
-<p>Finally I blank out the <code>AUTHOR</code> fields since there's no need to generate those pages. I'm not hiring contributors!</p>
-<h2>Publishing</h2>
-<p>I've got a blog post. I've set various configuration settings. Let's do this thing.</p>
-<p>The Makefile Pelican created includes a <code>github</code> target that does... everything. Once a blog post is ready to go I run <code>make github</code> and it all magically happens. To be more specific it:</p>
-<ol>
-<li>Deletes the <strong>output/</strong> folder</li>
-<li>Generates new HTML into the <strong>output/</strong> folder</li>
-<li>Uses the ghp-import package to copy the <strong>output/</strong> folder into the root folder of the <code>master</code> branch</li>
-<li>Push <code>master</code> to origin on GitHub</li>
-</ol>
-<p>Boom! Done! Our active development branch will remain <code>source</code>, ghp-import wholly owns <code>master</code> now, and never the two shall meet.</p>
-<h2>In Summation</h2>
-<p>Everything's set up and now the workflow is very simple: create new blog post files in <strong>content/</strong>, unmark them as drafts when they're ready to publish, and run <code>make github</code> to get them out to the world. That's pretty much it. Static sites are awesome!</p>
-<p>I do have a few things left before I consider this blog ready:</p>
-<ul>
-<li>come up with a custom theme</li>
-<li>clarify licenses for the software and site content</li>
-<li>slap google analytics on the site 'cuz why not</li>
-<li>add non-blog pages like about me or whatever who knows</li>
-<li>the devserver is fond of reminding me I have no favicon yet</li>
-</ul>
-<p>I've just touched on some notable points of my experience getting this blog up and running; Pelican itself has <a href="http://docs.getpelican.com/en/3.6.3/index.html">extensive documentation</a> if you need more detail. Additionally there's a whole galaxy of themes and plugins I haven't mentioned at all. All of this code is up on <a href="https://github.com/drmonkeysee/drmonkeysee.github.io/tree/source">my GitHub account</a> if you need specifics on how I've configured the site or structured the post files. Any questions not otherwise answered? Hit me up on <a href="https://twitter.com/drmonkeysee">Twitter</a>!</p>                </article>
+<div class="highlight"><pre><span class="c">&lt;!-- category.html --&gt;</span>
+{% block links %}
+    {% if CATEGORY_FEED_ATOM %}
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;{{ CATEGORY_FEED_ATOM|format(category) }}&quot;</span> <span class="na">rel=</span><span class="s">&quot;alternate&quot;</span> <span class="na">type=</span><span class="s">&quot;application/atom+xml&quot;</span> <span class="na">title=</span><span class="s">&quot;{{ category|title }} Atom Feed&quot;</span><span class="nt">&gt;</span>
+    {% endif %}
+{% endblock links %}
+</pre></div>
+
+
+<h2>All Together</h2>
+<p>There's a few other administrivia we can include at this point like Google Analytics script blocks, title tags, and stubbing out a section for content. Once we start loooking at layout we'll figure out where common elements like headers and footers go but that's for another day.</p>
+<p>Put it all together and the initial <strong>base.html</strong> is:</p>
+<div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;{{ DEFAULT_LANG }}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;IE=edge&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;author&quot;</span> <span class="na">content=</span><span class="s">&quot;{{ AUTHOR }}&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;subject&quot;</span> <span class="na">content=</span><span class="s">&quot;Dr Monkeysee&#39;s Dev Log&quot;</span><span class="nt">&gt;</span>
+    {% block metatags %}
+    {% endblock metatags %}
+    <span class="nt">&lt;title&gt;</span>{% block title %}{{ SITENAME }}{% endblock title %}<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+    {% if FEED_ALL_ATOM %}
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;{{ FEED_ALL_ATOM }}&quot;</span> <span class="na">rel=</span><span class="s">&quot;alternate&quot;</span> <span class="na">type=</span><span class="s">&quot;application/atom+xml&quot;</span> <span class="na">title=</span><span class="s">&quot;Everything Atom Feed&quot;</span><span class="nt">&gt;</span>
+    {% endif %}
+    {% block links %}
+    {% endblock links %}
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    {% block content %}
+    {% endblock content %}
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;https://code.jquery.com/jquery-2.1.4.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+</pre></div>
+
+
+<p>Some details have been truncated or omitted for brevity but you get the idea. I notice in a lot of examples the base template defines a block that encompasses the entire <code>&lt;head&gt;</code> tag but at this point I don't see a use-case where any child template will override the entire tag. Until that need arises I'm defining blocks for extending common elements like meta tags and links. The content block may become more nuanced once I start looking at layout but for now a simple block emcompassing all visual elements makes for easy testing of child templates.</p>
+<p>Speaking of which, I need to start defining those. Up next, layout!</p>                </article>
             </aside><!-- /#featured -->
                 <section id="content" class="body">
                     <h1>Other articles</h1>
@@ -115,14 +129,36 @@
 
             <li><article class="hentry">
                 <header>
-                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/11/setup-pelican-blog" rel="bookmark"
+                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/15/publish-pelican-blog" rel="bookmark"
+                           title="Permalink to Pelican blog publishing">Pelican blog publishing</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-12-15T22:06:10-08:00">
+                Published: Tue 15 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
+        </address>
+<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
+<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
+</footer><!-- /.post-info -->                <p>Publishing a blog with Pelican</p>
+                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/15/publish-pelican-blog">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/15/setup-pelican-blog" rel="bookmark"
                            title="Permalink to Pelican blog setup">Pelican blog setup</a></h1>
                 </header>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-12-11T22:01:23-08:00">
-                Published: Fri 11 December 2015
+        <abbr class="published" title="2015-12-15T22:06:10-08:00">
+                Published: Tue 15 December 2015
         </abbr>
 
         <address class="vcard author">
@@ -131,7 +167,7 @@
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
 </footer><!-- /.post-info -->                <p>Setting up a blog with Pelican</p>
-                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/11/setup-pelican-blog">read more</a>
+                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/15/setup-pelican-blog">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
 
@@ -143,7 +179,7 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-12-05T20:47:19-08:00">
+        <abbr class="published" title="2015-12-05T00:00:00-08:00">
                 Published: Sat 05 December 2015
         </abbr>
 
@@ -151,7 +187,7 @@
                 By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
-<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
+<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> <a href="http://drmonkeysee.github.io/tags/theming">theming</a> </p>
 </footer><!-- /.post-info -->                <p>A trip to the theme emporium</p>
                 <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping">read more</a>
                 </div><!-- /.entry-content -->

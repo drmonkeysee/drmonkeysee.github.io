@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Dev Log and also other Blog Stuff too</title>
+        <title>Theme Base Design</title>
         <link rel="stylesheet" href="http://drmonkeysee.github.io/theme/css/main.css" />
         <link href="http://drmonkeysee.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Dev Log and also other Blog Stuff too Atom Feed" />
 
@@ -20,10 +20,16 @@
                 <nav><ul>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://drmonkeysee.github.io/blog/2015/12/19/theme-base" rel="bookmark"
+           title="Permalink to Theme Base Design">Theme Base Design</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="drmonkeysee">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/19/theme-base">Theme Base Design</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-19T19:52:16-08:00">
                 Published: Sat 19 December 2015
@@ -34,7 +40,7 @@
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> <a href="http://drmonkeysee.github.io/tags/theming">theming</a> </p>
-</footer><!-- /.post-info --><p>The first step for my custom theme is designing the basic structure of every page, placed in <strong>base.html</strong>. I decided the first step of <em>that</em> process is making the machines happy. Picking out the meta tags, feed links, title, doctype, and all the other tags that no one sees but tells various computers what's going on.</p>
+</footer><!-- /.post-info -->      <p>The first step for my custom theme is designing the basic structure of every page, placed in <strong>base.html</strong>. I decided the first step of <em>that</em> process is making the machines happy. Picking out the meta tags, feed links, title, doctype, and all the other tags that no one sees but tells various computers what's going on.</p>
 <p>Layout and other visual elements will come later, though I've already decided what I'll start with. As mentioned in an <a href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping">earlier post</a> I'm going to base my theme on <a href="http://getbootstrap.com">Bootstrap</a>. It's not clear to me if I want to pull in <a href="http://fontawesome.io">Font Awesome</a>, although the icon list looks very promising. I do know I don't want to write something from the ground-up. I don't particularly enjoy endlessly tweaking CSS and that will be my entire life if I start with a blank canvas.</p>
 <p>I'll be closely following the <a href="http://docs.getpelican.com/en/3.6.3/themes.html">theme documentation</a> for Pelican, the <a href="http://jinja.pocoo.org/docs/dev/templates/">Jinja2 docs</a>, as well as referencing various repos for examples.</p>
 <h2>Styling</h2>
@@ -120,124 +126,11 @@
 
 
 <p>Some details have been truncated or omitted for brevity but you get the idea. I notice in a lot of examples the base template defines a block that encompasses the entire <code>&lt;head&gt;</code> tag but at this point I don't see a use-case where any child template will override the entire tag. Until that need arises I'm defining blocks for extending common elements like meta tags and links. The content block may become more nuanced once I start looking at layout but for now a simple block emcompassing all visual elements makes for easy testing of child templates.</p>
-<p>Speaking of which, I need to start defining those. Up next, layout!</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>Speaking of which, I need to start defining those. Up next, layout!</p>
+    </div><!-- /.entry-content -->
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/15/publish-pelican-blog" rel="bookmark"
-                           title="Permalink to Pelican blog publishing">Pelican blog publishing</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-12-15T22:06:10-08:00">
-                Published: Tue 15 December 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
-        </address>
-<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
-<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
-</footer><!-- /.post-info -->                <p>Publishing a blog with Pelican</p>
-                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/15/publish-pelican-blog">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/15/setup-pelican-blog" rel="bookmark"
-                           title="Permalink to Pelican blog setup">Pelican blog setup</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-12-15T22:06:10-08:00">
-                Published: Tue 15 December 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
-        </address>
-<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
-<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
-</footer><!-- /.post-info -->                <p>Setting up a blog with Pelican</p>
-                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/15/setup-pelican-blog">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping" rel="bookmark"
-                           title="Permalink to Theme Shopping">Theme Shopping</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-12-05T00:00:00-08:00">
-                Published: Sat 05 December 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
-        </address>
-<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
-<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> <a href="http://drmonkeysee.github.io/tags/theming">theming</a> </p>
-</footer><!-- /.post-info -->                <p>A trip to the theme emporium</p>
-                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/05/theme-shopping">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/04/hello-published" rel="bookmark"
-                           title="Permalink to Hello Published!">Hello Published!</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-12-04T00:00:00-08:00">
-                Published: Fri 04 December 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
-        </address>
-<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
-<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
-</footer><!-- /.post-info -->                <p>Hey look! Published!</p>
-                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/04/hello-published">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/04/hello-world" rel="bookmark"
-                           title="Permalink to Hello World">Hello World</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2015-12-04T00:00:00-08:00">
-                Published: Fri 04 December 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
-        </address>
-<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
-<p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> </p>
-</footer><!-- /.post-info -->                <p>Obligatory hello world post</p>
-                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/04/hello-world">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
