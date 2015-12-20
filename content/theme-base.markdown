@@ -71,7 +71,7 @@ Throwing together a quick-and-dirty **category.html** lets me test whether the f
 ```
 ## All Together
 
-There's a few other administrivia we can include at this point like Google Analytics script blocks, title tags, and stubbing out a section for content. Once we start loooking at layout we'll figure out where common elements like headers and footers go but that's for another day.
+There's a few other administrivia we can include at this point like Google Analytics script blocks, title tags, and stubbing out a section for content. Once we start looking at layout we'll figure out where common elements like headers and footers go but that's for another day.
 
 Put it all together and the initial **base.html** is:
 
@@ -102,6 +102,6 @@ Put it all together and the initial **base.html** is:
   </body>
 ```
 
-Some details have been truncated or omitted for brevity but you get the idea. I notice in a lot of examples the base template defines a block that encompasses the entire `<head>` tag but at this point I don't see a use-case where any child template will override the entire tag. Until that need arises I'm defining blocks for extending common elements like meta tags and links. The content block may become more nuanced once I start looking at layout but for now a simple block emcompassing all visual elements makes for easy testing of child templates.
+Some details have been truncated or omitted for brevity but you get the idea. I notice in a lot of examples the base template defines a block that encompasses the entire `<head>` tag but at this point I don't see a use-case where any child template will override the entire tag. Until that need arises I'm defining blocks for extending common elements like meta tags and links. The content block may become more nuanced once I start on layout but for now a simple block emcompassing all visual elements makes for easy testing of child templates.
 
 Speaking of which, I need to start defining those. Up next, layout!
