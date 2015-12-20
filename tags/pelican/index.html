@@ -25,7 +25,7 @@
                 <article>
                     <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/19/theme-base">Theme Base Design</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2015-12-19T19:52:16-08:00">
+        <abbr class="published" title="2015-12-19T22:22:01-08:00">
                 Published: Sat 19 December 2015
         </abbr>
 
@@ -90,7 +90,7 @@
 
 
 <h2>All Together</h2>
-<p>There's a few other administrivia we can include at this point like Google Analytics script blocks, title tags, and stubbing out a section for content. Once we start loooking at layout we'll figure out where common elements like headers and footers go but that's for another day.</p>
+<p>There's a few other administrivia we can include at this point like Google Analytics script blocks, title tags, and stubbing out a section for content. Once we start looking at layout we'll figure out where common elements like headers and footers go but that's for another day.</p>
 <p>Put it all together and the initial <strong>base.html</strong> is:</p>
 <div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;{{ DEFAULT_LANG }}&quot;</span><span class="nt">&gt;</span>
@@ -119,7 +119,7 @@
 </pre></div>
 
 
-<p>Some details have been truncated or omitted for brevity but you get the idea. I notice in a lot of examples the base template defines a block that encompasses the entire <code>&lt;head&gt;</code> tag but at this point I don't see a use-case where any child template will override the entire tag. Until that need arises I'm defining blocks for extending common elements like meta tags and links. The content block may become more nuanced once I start looking at layout but for now a simple block emcompassing all visual elements makes for easy testing of child templates.</p>
+<p>Some details have been truncated or omitted for brevity but you get the idea. I notice in a lot of examples the base template defines a block that encompasses the entire <code>&lt;head&gt;</code> tag but at this point I don't see a use-case where any child template will override the entire tag. Until that need arises I'm defining blocks for extending common elements like meta tags and links. The content block may become more nuanced once I start on layout but for now a simple block emcompassing all visual elements makes for easy testing of child templates.</p>
 <p>Speaking of which, I need to start defining those. Up next, layout!</p>                </article>
             </aside><!-- /#featured -->
                 <section id="content" class="body">
