@@ -2,7 +2,6 @@ Title: Initial layout thoughts
 Category: blog
 Tags: pelican, blogging, theming, tools
 Summary: Some initial stabs at what this blog should look like, plus some new tool usage
-Status: draft
 
 I need a layout. The first thing is read over the [Bootstrap](http://getbootstrap.com/css/) docs to refresh my memory on its visual components. I sling a few HTML elements and CSS rules around. And then I step back.
 
