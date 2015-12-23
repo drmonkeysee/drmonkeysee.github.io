@@ -2,6 +2,7 @@ Title: Theme Base Design
 Category: blog
 Tags: pelican, blogging, theming
 Summary: Building a theme: the basics
+Date: 2015-12-19
 
 The first step for my custom theme is designing the basic structure of every page, placed in **base.html**. I decided the first step of *that* process is making the machines happy. Picking out the meta tags, feed links, title, doctype, and all the other tags that no one sees but tells various computers what's going on.
 

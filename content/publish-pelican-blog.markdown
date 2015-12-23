@@ -2,6 +2,7 @@ Title: Pelican blog publishing
 Category: blog
 Tags: pelican, blogging
 Summary: Publishing a blog with Pelican
+Date: 2015-12-15
 
 I've got a newly minted Pelican site but I haven't produced anything yet. To find out how that happened go read [this post]({filename}/setup-pelican-blog.markdown). Now what? Well I'm not going to detail exactly how I've carefully crafted every blog post because who cares?? You do you. I *will* point out some notable considerations that went into putting the blog together.
 

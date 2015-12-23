@@ -2,6 +2,7 @@ Title: Pelican blog setup
 Category: blog
 Tags: pelican, blogging
 Summary: Setting up a blog with Pelican
+Date: 2015-12-15
 
 How did I set up this blog? Let's find out.
 
