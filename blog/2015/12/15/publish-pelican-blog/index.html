@@ -31,7 +31,7 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2015-12-15T22:06:10-08:00">
+        <abbr class="published" title="2015-12-15T00:00:00-08:00">
                 Published: Tue 15 December 2015
         </abbr>
 
@@ -74,7 +74,7 @@
 <p>I fill out various social network fields including GitHub, Twitter, and Email because I guess I like spam. I turn <code>RELATIVE_URLS</code> on for local development and move the <code>SITEURL</code> field from <strong>publishconf.py</strong> so it's available during development. <strong>publishconf.py</strong> overrides <strong>pelicanconf.py</strong> settings for the publish action and other than that one change it's fine as is.</p>
 <h3>Metadata</h3>
 <p>Pelican reads a bunch of metadata fields from the top of a blog file to determine various things like title, publish date, tags, etc (see example above). Looking at various examples out there I find that most authors are putting dates explicitly in the metadata but that seems awfully fussy. What if I forget to change the date when I actually publish? Or I fat finger it?</p>
-<p>Fortunately setting <code>DEFAULT_DATE = 'fs'</code> tells Pelican to figure out publish date from the file system. Most of the time this is what I want and if not I can override in the file directly. Problem solved.</p>
+<p>Fortunately setting <code>DEFAULT_DATE = 'fs'</code> tells Pelican to figure out publish date from the file system. Most of the time this is what I want and if not I can override in the file directly. Problem solved. (UPDATE: but wait, <a href="http://drmonkeysee.github.io/blog/2015/12/23/blog-config-revisited">there's more</a>!)</p>
 <p>The slug, by default, comes from the title but sometimes I may want a fancier title than I want in the url. Setting <code>SLUGIFY_SOURCE = 'basename'</code> pulls the slug from the name of the file <em>sans</em> extension. Alright. Looks good.</p>
 <p>Blog entries should be considered drafts until I'm ready to publish. There's another field <code>Status: draft</code> that is awfully handy. The documentation claims that this field can be set in <strong>pelicanconf.py</strong> to set the default to draft (via <code>DEFAULT_METADATA</code>) but I found it to be really flaky. Sometimes it would make all files drafts, sometimes all files would be published, and sometimes it would do what the file metadata said. It would rotate between these outcomes randomly every time I generated the site, so I abandoned that setting and will have to mark every entry as a draft manually. Oh well.</p>
 <p>That's mostly it for metadata and general settings. But there's one final detail.</p>
