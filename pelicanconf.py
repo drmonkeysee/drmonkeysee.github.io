@@ -32,7 +32,7 @@ DEFAULT_PAGINATION = 10
 THEME = 'notmyidea'
 DISPLAY_CATEGORIES_ON_MENU = False
 RELATIVE_URLS = True
-IGNORE_FILES = ['.#*', '.DS_Store']
+IGNORE_FILES = ['.DS_Store']
 
 # Url stuff
 DEFAULT_DATE = 'fs'
