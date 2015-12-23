@@ -49,7 +49,7 @@ I fill out various social network fields including GitHub, Twitter, and Email be
 
 Pelican reads a bunch of metadata fields from the top of a blog file to determine various things like title, publish date, tags, etc (see example above). Looking at various examples out there I find that most authors are putting dates explicitly in the metadata but that seems awfully fussy. What if I forget to change the date when I actually publish? Or I fat finger it?
 
-Fortunately setting `DEFAULT_DATE = 'fs'` tells Pelican to figure out publish date from the file system. Most of the time this is what I want and if not I can override in the file directly. Problem solved.
+Fortunately setting `DEFAULT_DATE = 'fs'` tells Pelican to figure out publish date from the file system. Most of the time this is what I want and if not I can override in the file directly. Problem solved. (UPDATE: but wait, [there's more]({filename}/blog-config-revisited.markdown)!)
 
 The slug, by default, comes from the title but sometimes I may want a fancier title than I want in the url. Setting `SLUGIFY_SOURCE = 'basename'` pulls the slug from the name of the file *sans* extension. Alright. Looks good.
 
