@@ -9,5 +9,25 @@
 {% block title %}{{ super() }} - Home{% endblock title %}
 
 {% block content %}
-    <h1>Foobar</h1>
+      {% for article in articles %}
+        {% if loop.first %}
+          <article>
+            <header>
+              <h2>{{ article.title }}</h2>
+              <time class="small" datetime="{{ article.date|strftime('%Y-%m-%dT%H:%M:%S%z') }}" pubdate>{{ article.locale_date }}</time>
+            </header>
+            <div>
+              {{ article.content }}
+            </div>
+            <footer>
+              Posted in {{ article.category }} by {{ AUTHOR }} -
+              <ul class="list-inline" style="display: inline;">
+              {% for tag in article.tags %}
+                <li>#{{ tag }}</li>
+              {% endfor %}
+              </ul>
+            </footer>
+          </article>
+        {% endif %}
+      {% endfor %}
 {% endblock content %}

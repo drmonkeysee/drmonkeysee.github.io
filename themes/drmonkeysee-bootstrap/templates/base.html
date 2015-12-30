@@ -17,8 +17,63 @@
     {% endblock links %}
   </head>
   <body>
-    {% block content %}
-    {% endblock content %}
+    <header class="page-header">
+      <h1>{{ SITENAME }}</h1>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          {% block content %}
+          {% endblock content %}
+        </div>
+        <div class="col-sm-4 well">
+          <nav class="panel">
+            <ul class="list-group">
+            {% for cat, art in categories %}
+              <li class="list-group-item">{{ cat }}</li>
+            {% endfor %}
+            </ul>
+          </nav>
+          <nav class="panel">
+            <ul class="list-group">
+            {% for tag, art in tags %}
+              <li class="list-group-item">{{ tag }}</li>
+            {% endfor %}
+            </ul>
+          </nav>
+          <nav class="panel">
+            <ul class="list-group">
+            {% for page in pages %}
+              <li class="list-group-item">{{ page }}</li>
+            {% endfor %}
+            </ul>
+          </nav>
+          <hr>
+          <section class="panel">
+            <ul class="list-group">
+            {% for label, href in SOCIAL %}
+              <li class="list-group-item">{{ label }}</li>
+            {% endfor %}
+            </ul>
+          </section>
+          <section class="panel">
+            <ul class="list-group">
+            {% for label, href in LINKS %}
+              <li class="list-group-item">{{ label }}</li>
+            {% endfor %}
+            </ul>
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <p>foobar</p>
+        </div>
+        <div class="col-sm-6">
+          <p>barfoo</p>
+        </div>
+      </div>
+    </div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
     {% if GOOGLE_ANALYTICS %}
