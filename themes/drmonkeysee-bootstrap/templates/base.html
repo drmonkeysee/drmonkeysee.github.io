@@ -18,7 +18,9 @@
   </head>
   <body>
     <header class="page-header">
-      <h1>{{ SITENAME }}</h1>
+      <div class="container">
+        <h1>{{ SITENAME }}</h1>
+      </div>
     </header>
     <div class="container">
       <div class="row">
@@ -65,15 +67,17 @@
           </section>
         </div>
       </div>
+    </div>
+    <footer class="container-fluid">
       <div class="row">
         <div class="col-sm-6">
-          <p>foobar</p>
+          <p>Copyright stuff</p>
         </div>
-        <div class="col-sm-6">
-          <p>barfoo</p>
+        <div class="col-sm-6 text-right">
+          <p>Powered by links</p>
         </div>
       </div>
-    </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
     {% if GOOGLE_ANALYTICS %}
