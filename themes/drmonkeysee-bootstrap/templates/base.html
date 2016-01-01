@@ -17,16 +17,18 @@
     {% endblock links %}
   </head>
   <body>
-    <header class="page-header">
-      <h1>{{ SITENAME }}</h1>
-    </header>
+    <div class="container">
+      <header class="page-header">
+        <h1>{{ SITENAME }}</h1>
+      </header>
+    </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-10 col-sm-offset-1 text-justify">
           {% block content %}
           {% endblock content %}
         </div>
-        <div class="col-sm-4 well">
+        <!--<div class="col-sm-4 well">
           <nav class="panel">
             <ul class="list-group">
             {% for cat, art in categories %}
@@ -63,14 +65,14 @@
             {% endfor %}
             </ul>
           </section>
-        </div>
+        </div> -->
       </div>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6" style="background-color: aqua;">
           <p>foobar</p>
         </div>
-        <div class="col-sm-6">
-          <p>barfoo</p>
+        <div class="col-sm-6" style="background-color: green;">
+          <p class="text-right">barfoo</p>
         </div>
       </div>
     </div>
