@@ -23,7 +23,39 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2015/12/22/theme-layout-thoughts">Initial layout thoughts</a></h1>
+                    <h1 class="entry-title"><a href="http://drmonkeysee.github.io/blog/2016/01/01/plan-file-new-year">A .plan file for the New Year</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-01-01T00:00:00-08:00">
+                Published: Fri 01 January 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://drmonkeysee.github.io/">Brandon Stansbury</a>
+        </address>
+<p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
+<p>tags: <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> <a href="http://drmonkeysee.github.io/tags/theming">theming</a> </p>
+</footer><!-- /.post-info --><p>I'm still sussing out exactly what I want this blog to be but there's a hint in the title. This is a Dev Log. To wit: a log of development activities I'm doing in my freetime. I may talk about work obliquely on occasion (in case it wasn't obvious I am also a professional programmer) but that won't be the focus.</p>
+<p>The immediate metaphor that comes to mind is the old-school <a href="http://www.catb.org/jargon/html/P/plan-file.html">.plan file</a>. This will be an ongoing record of whatever I'm doing, or thinking about doing, or having trouble with, or general thoughts on software development or technology if I'm feeling sassy. The specific balance of these topics will evolve I'm sure.</p>
+<p>To that point my goal, starting in 2016, is to post at least <em>once</em> a week to get in the habit of keeping this project going. It'd be sad if this turned into another derelict blog abandoned on the Internet and setting a schedule should hopefully avoid that fate. At the very least it'll take the form of a "weekly update" summing up any thoughts or notes since the previous post. Let's see how it goes!</p>
+<h2>Ongoing theme work</h2>
+<p>Speaking of blog content, I do eventually want to stop blogging about the creation of this blog but that won't happen until it's done. Theme work is ongoing and I have a basic layout for the <strong>index.html</strong> template. I toggled between a two-column and one-column layout but the one-column layout was vetoed independently by two different friends so I'm fleshing out details of the two-column layout. This lines up with the spec sketch from <a href="http://drmonkeysee.github.io/blog/2015/12/22/theme-layout-thoughts">earlier</a> so that's nice.</p>
+<p>There's at least one detail that has become apparent now that I have a semi-functional layout. The home page either needs to be a list of summaries or a page of full articles. Inlining a single article and showing summaries for the rest of the entries looks awkward. I'm leaning towards the former since the latter is a bit heavy for a home page.</p>
+<p>Progess is coming along and I'll show my work in the near future. Since this dev log is composed of side-projects and hobbies, progress will be in fits and starts as life or other interests get in the way. There may not be impressive jumps forward in every blog entry but we'll get there eventually.</p>
+<h2>Pelican Summaries</h2>
+<p>I just noticed in the Pelican settings documentation that I can set a summary length that will take the first X characters from the body of the article if the <code>Summary</code> metadata field isn't set directly. This is cool because coming up with an article body, an article title, an article slug, <em>and</em> an article summary is a bit much. I'll look at this later but I will probably stop writing explicit summaries. This will also make the list of summaries mentioned above more palatable as the home page.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://drmonkeysee.github.io/blog/2015/12/22/theme-layout-thoughts" rel="bookmark"
+                           title="Permalink to Initial layout thoughts">Initial layout thoughts</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-22T00:00:00-08:00">
                 Published: Tue 22 December 2015
@@ -34,30 +66,10 @@
         </address>
 <p>In <a href="http://drmonkeysee.github.io/blog">blog</a>.</p>
 <p>tags: <a href="http://drmonkeysee.github.io/tags/pelican">pelican</a> <a href="http://drmonkeysee.github.io/tags/blogging">blogging</a> <a href="http://drmonkeysee.github.io/tags/theming">theming</a> <a href="http://drmonkeysee.github.io/tags/tools">tools</a> </p>
-</footer><!-- /.post-info --><p>I need a layout. The first thing is read over the <a href="http://getbootstrap.com/css/">Bootstrap</a> docs to refresh my memory on its visual components. I sling a few HTML elements and CSS rules around. And then I step back.</p>
-<p>Gross. This isn't working. I need to figure all the blog parts and how they should fit together before I start writing actual HTML. I'm having trouble visualizing it otherwise.</p>
-<p>Normally I would draw something quick on paper but this is a dev log; the whole point is to show my work! Drawing on a laptop touchpad is a no-go so I look around for paint programs I can use on a tablet. Turns out <a href="http://www.pixelmator.com/mac/">Pixelmator</a> fits the bill as there's both an iOS and OS X version, making it easy to move sketches around.</p>
-<p>I'm not looking to create anything fancy; a two column layout with content on the left and navigation/links on the right. This is pretty easy in Bootstrap so I'm not too worried. The bigger question at the moment is cataloguing all the Pelican features and deciding how they fit together. In addition there's two flags I'd like the theme to pay attention to: <code>DISPLAY_PAGES_ON_MENU</code> and <code>DISPLAY_CATEGORIES_ON_MENU</code>. This means a design that can include or exclude page and category links without looking janky.</p>
-<p>My initial attempt:</p>
-<p><a href="http://drmonkeysee.github.io/images/2015-12/initial-index-layout.png" title="Initial index layout">
-    <img src="http://drmonkeysee.github.io/images/2015-12/initial-index-layout-t.png" alt="Initial index layout">
-</a></p>
-<p>It's a rough sketch! Done on an iPad with my finger! Judge not. That weird block in the upper-right is an RSS/ATOM feed icon in case you're wondering. Overall the iOS drawing worked out fine though I'll probably rely on fewer text elements to fill out space in the future as they're awfully fiddly on a touch screen. I briefly considered getting a stylus but surveying the results on Amazon led to a field of broken dreams, so touch-drawing it is.</p>
-<p>The left-hand column is where content will go. The latest blog post will be shown in full, the rest will be summaries, and pagination controls fill out the column. The right-hand column is all navigation and other various links. "categories", "tags", and "archives" are all generated by Pelican. "pages" includes about me, etc while "social" and "links" are the <code>SOCIAL</code> and <code>LINKS</code> settings in <strong>pelicanconf.py</strong> respectively. This is a layout diagram only so no visual elements described. I'll figure that out later.</p>
-<p>One side-effect I did <em>not</em> anticipate was the retina screen factor. I created thumbnail and full-size images in Pixelmator, linked them into the blog post, and tested in a browser... it looked <em>terrible</em>. Turns out Pixelmator displays the image in actual pixels, but everything else will scale up by a factor of two for the retina resolution. Every image I sized ended up twice as large in the browser and the compression made everything look like garbage. So scale everything to half what I want visually and make sure it looks ok at 200% size. There's other CSS tricks to make this work better with 2x images but these rough sketches aren't worth it.</p>
-<p>Anyway the upshot is I have a visualization to which I'm working towards in HTML. The exercise did raise some questions:</p>
-<ul>
-<li>I'll have to play with the order of right-hand nav once I get something rendering. I'm not sure what the user will find most relevant and it will be tough to judge until I can see it in-browser.</li>
-<li>Most Pelican themes list additional blog posts inline with the rest of the content and that's what I've drawn here but I don't like the look much. I may swing older posts into the nav bar but that poses questions on how the pagination would work visually.</li>
-<li>For a single article page I'd like to show related blog posts, ordered by tags. Some sort of sorted intersection of tags across all articles should work, but I'm not sure I have that level of control in Jinja.</li>
-<li>The current image linking is ugly: I'm going to pull in <a href="http://www.jacklmoore.com/colorbox/">Colorbox</a> to do the visual display.</li>
-</ul>
-<p>The index template will inform all the other pages on the blog. I'm anticipating that every page will look more or less like this one other than the content column. Next time we'll talk HTML.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Some initial stabs at what this blog should look like, plus some new tool usage</p>
+                <a class="readmore" href="http://drmonkeysee.github.io/blog/2015/12/22/theme-layout-thoughts">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
