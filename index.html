@@ -16,6 +16,7 @@
           enable: true // Set to false to hide
         }
       }]);
+      OneSignal.push(['getUserId', function (uid) {console.log('My id is:', uid)}]);
     </script>
   </head>
   <body>
