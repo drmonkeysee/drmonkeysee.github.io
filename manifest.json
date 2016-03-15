@@ -1,0 +1,8 @@
+{
+  "name": "Test Notifications",
+  "short_name": "testnotifications",
+  "start_url": "/",
+  "display": "standalone",
+  "gcm_sender_id": "AIzaSyBL3l18ohTEaoZv_GSaD5LTCAQUH1HXuDU",
+  "gcm_user_visible_only": true
+}
