@@ -16,8 +16,8 @@
           enable: true // Set to false to hide
         }
       }]);
-      OneSignal.push(['getUserId', function (uid) {console.log('My id is:', uid)}]);
-      OneSignal.push(['sendTag', "foo", "foovalue"]);
+      OneSignal.push(['getUserId', function (uid) { console.log('My id is:', uid); }]);
+      OneSignal.push(['sendTag', 'foo', 'foovalue', function (tags) { console.log('Set tags:', tags); }]);
     </script>
   </head>
   <body>
