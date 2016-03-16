@@ -63,10 +63,12 @@
         OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
           setButtons(enabled);
         }]);
-        OneSignal.push(['subscriptionChange', function (isSubscribed) {
-          setButtons(isSubscribed);
-          console.log('subscription changed', isSubscribed);
-        }]);
+        OneSignal.push(function () {
+          OneSignal.on('subscriptionChange', function (isSubscribed) {
+            setButtons(isSubscribed);
+            console.log('subscription changed', isSubscribed);
+          });
+        });
       });
     </script>
   </body>
