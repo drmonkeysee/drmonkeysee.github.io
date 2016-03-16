@@ -38,7 +38,11 @@
     <script>
       $(function () {
         function setButtons(subscribed) {
-          if (subscribed) {
+          if (Notification && Notification.permission === 'denied') {
+            $('#subscribe').prop('disabled', false);
+            $('#unsubscribe').prop('disabled', false);
+            $('#output').text('notifications denied');
+          } else if (subscribed) {
             $('#subscribe').prop('disabled', true);
             $('#unsubscribe').prop('disabled', false);
             $('#output').text('subscribed');
@@ -49,7 +53,7 @@
           }
         }
         OneSignal.push(function () {
-          console.log('push nots supported: ', OneSignal.isPushNotificationsSupported());
+          console.log('push notifications supported:', OneSignal.isPushNotificationsSupported());
         });
         $('#subscribe').click(function () {
           OneSignal.push(['setSubscription', true]);
