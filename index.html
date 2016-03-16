@@ -2,75 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Notification Demo</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script>
-      var OneSignal = OneSignal || [];
-      OneSignal.LOGGING = true;
-      OneSignal.push(['init', {
-        appId: '70993a42-7820-4f21-bcd2-21519d0b6227',
-        autoRegister: true,
-        notifyButton: {
-          enable: false // Set to false to hide
-        }
-      }]);
-      OneSignal.push(['getUserId', function (uid) { console.log('My id is:', uid); }]);
-      OneSignal.push(['sendTag', 'foo', 'foovalue', function (tags) { console.log('Set tags:', tags); }]);
-    </script>
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1>Get some notifications, jerk</h1>
-          <button id="subscribe" class="btn btn-default" type="submit">Subscribe</button>
-          <button id="unsubscribe" class="btn btn-default" type="submit">Unsubscribe</button>
-          <p id="output">Push subscribe to initialize worker</p>
-          <p id="subscription"></p>
-        </div>
-      </div>
+      <h1>Get some notifications, jerk</h1>
+      <button id="subscribe" class="btn btn-default" type="submit">Subscribe</button>
+      <button id="unsubscribe" class="btn btn-default" type="submit">Unsubscribe</button>
+      <p id="output">Placeholder</p>
+      <p id="subscription"></p>
     </div>
     <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-    <script>
-      $(function () {
-        function setButtons(subscribed) {
-          if (Notification && Notification.permission === 'denied') {
-            $('#subscribe').prop('disabled', true);
-            $('#unsubscribe').prop('disabled', true);
-            $('#output').text('notifications denied');
-          } else if (subscribed) {
-            $('#subscribe').prop('disabled', true);
-            $('#unsubscribe').prop('disabled', false);
-            $('#output').text('subscribed');
-          } else {
-            $('#subscribe').prop('disabled', false);
-            $('#unsubscribe').prop('disabled', true);
-            $('#output').text('unsubscribed');
-          }
-        }
-        OneSignal.push(function () {
-          console.log('push notifications supported:', OneSignal.isPushNotificationsSupported());
-        });
-        $('#subscribe').click(function () {
-          OneSignal.push(['setSubscription', true]);
-        });
-        $('#unsubscribe').click(function () {
-          OneSignal.push(['setSubscription', false]);
-        });
-        OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
-          setButtons(enabled);
-        }]);
-        OneSignal.push(function () {
-          OneSignal.on('subscriptionChange', function (isSubscribed) {
-            setButtons(isSubscribed);
-            console.log('subscription changed', isSubscribed);
-          });
-        });
-      });
-    </script>
+    <script src="https://drmonkeysee.github.io/main.js" async></script>
   </body>
 </html>

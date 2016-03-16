@@ -45,7 +45,7 @@ $(function () {
 
   Notification.requestPermission();
 
-  navigator.serviceWorker.register('sw.js').then(function (reg) {
+  navigator.serviceWorker.register('https://drmonkeysee.github.io/sw.js').then(function (reg) {
     if (reg.installing) {
       writeMsg('Installing service worker...');
     } else if (reg.waiting) {
