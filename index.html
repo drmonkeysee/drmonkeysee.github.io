@@ -37,14 +37,33 @@
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
     <script>
       $(function () {
+        function setButtons(subscribed) {
+          if (subscribed) {
+            $('#subscribe').prop('disabled', true);
+            $('#output').text('subscribed');
+          } else {
+            $('#subscribe').prop('disabled', false);
+            $('#output').text('unsubscribed');
+          }
+        }
         $('#subscribe').click(function () {
           OneSignal.push(['setSubscription', true]);
+          OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
+            setButtons(enabled);
+          }]);
         });
         $('#unsubscribe').click(function () {
           OneSignal.push(['setSubscription', false]);
+          OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
+            setButtons(enabled);
+          }]);
         });
         OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
-          $('#output').text(enabled ? 'subscribed' : 'unsubscribed');
+          setButtons(enabled);
+        }]);
+        OneSignal.push(['subscriptionChange', function (isSubscribed) {
+          setButtons(isSubscribed);
+          console.log('subscription changed', isSubscribed);
         }]);
       });
     </script>
