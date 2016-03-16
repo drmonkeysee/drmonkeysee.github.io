@@ -50,15 +50,9 @@
         }
         $('#subscribe').click(function () {
           OneSignal.push(['setSubscription', true]);
-          OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
-            setButtons(enabled);
-          }]);
         });
         $('#unsubscribe').click(function () {
           OneSignal.push(['setSubscription', false]);
-          OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
-            setButtons(enabled);
-          }]);
         });
         OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
           setButtons(enabled);
