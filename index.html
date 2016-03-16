@@ -48,6 +48,9 @@
             $('#output').text('unsubscribed');
           }
         }
+        OneSignal.push(function () {
+          console.log('push nots supported: ', OneSignal.isPushNotificationsSupported());
+        });
         $('#subscribe').click(function () {
           OneSignal.push(['setSubscription', true]);
         });
