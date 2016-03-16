@@ -40,9 +40,11 @@
         function setButtons(subscribed) {
           if (subscribed) {
             $('#subscribe').prop('disabled', true);
+            $('#unsubscribe').prop('disabled', false);
             $('#output').text('subscribed');
           } else {
-            $('#unsubscribe').prop('disabled', false);
+            $('#subscribe').prop('disabled', false);
+            $('#unsubscribe').prop('disabled', true);
             $('#output').text('unsubscribed');
           }
         }
