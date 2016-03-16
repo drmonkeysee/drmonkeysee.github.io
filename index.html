@@ -11,9 +11,9 @@
       OneSignal.LOGGING = true;
       OneSignal.push(['init', {
         appId: '70993a42-7820-4f21-bcd2-21519d0b6227',
-        autoRegister: false,
+        autoRegister: true,
         notifyButton: {
-          enable: true // Set to false to hide
+          enable: false // Set to false to hide
         }
       }]);
       OneSignal.push(['getUserId', function (uid) { console.log('My id is:', uid); }]);
