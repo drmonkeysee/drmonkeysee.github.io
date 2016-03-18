@@ -84,6 +84,7 @@
           }, 200);
         });
         $('#notify-deny').click(function () {
+          localStorage.setItem('deny-notify', 'yes');
           setTimeout(function() {
             $('#notify-bar').collapse('hide');
           }, 200);
@@ -92,6 +93,11 @@
           OneSignal.push(function () {
             if (!OneSignal.isPushNotificationsSupported()) {
               console.log('push notifications not supported');
+              return;
+            }
+
+            if (localStorage.getItem('no-notify')) {
+              console.log('push notifications denied');
               return;
             }
 
