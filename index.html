@@ -9,18 +9,15 @@
     <script>
       var OneSignal = OneSignal || [];
       OneSignal.LOGGING = true;
-      OneSignal.zoo = {};
       if (location.protocol === 'https:') {
         OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227'
         }]);
-        OneSignal.zoo.tls = true;
       } else {
         OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227',
           subdomainName: 'drmonkeysee-github'
         }]);
-        OneSignal.zoo.tls = false;
       }
     </script>
   </head>
@@ -80,29 +77,31 @@
             console.log('subscription changed', isSubscribed);
           });
         });
-        OneSignal.push(function () {
-          if (!OneSignal.isPushNotificationsSupported()) {
-            console.log('push notifications not supported');
-            return;
-          }
-
-          OneSignal.isPushNotificationsEnabled(function (enabled) {
-            console.log('TLS Status', OneSignal.zoo.tls);
-
-            if (enabled) {
-              console.log('notifications already enabled');
+        if (location.protocol === 'http:') {
+          OneSignal.push(function () {
+            if (!OneSignal.isPushNotificationsSupported()) {
+              console.log('push notifications not supported');
               return;
             }
 
-            console.log('notifications not enabled');
-            OneSignal.getUserId(function (uid) {
-              console.log('uid found, leave user alone', uid);
-              if (!uid) {
-                $('#notify-bar').collapse('show');
+            OneSignal.isPushNotificationsEnabled(function (enabled) {
+              console.log('TLS Status', OneSignal.zoo.tls);
+
+              if (enabled) {
+                console.log('notifications already enabled');
+                return;
               }
-            })
+
+              console.log('notifications not enabled');
+              OneSignal.getUserId(function (uid) {
+                console.log('uid found, leave user alone', uid);
+                if (!uid) {
+                  $('#notify-bar').collapse('show');
+                }
+              })
+            });
           });
-        });
+        }
         /*setTimeout(function () {
           $('#notify-bar').collapse('show');
         }, 500);*/
