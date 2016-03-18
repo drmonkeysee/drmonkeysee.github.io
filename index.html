@@ -24,13 +24,21 @@
     </script>
   </head>
   <body>
+    <div id="notify-bar" class="panel collapse">
+      <div class="panel-body">
+        <ul class="list-inline">
+          <li>Would you like notifications from Zoo?</li>
+          <li><button type="button" class="btn btn-default">Deny</button></li>
+          <li><button type="button" class="btn btn-primary">Allow</button></li>
+        </ul>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <h1>Get some notifications, jerk</h1>
           <button id="subscribe" class="btn btn-default" type="submit">Subscribe</button>
           <button id="unsubscribe" class="btn btn-default" type="submit">Unsubscribe</button>
-          <button id="httpregister" class="btn btn-default" type="submit">Insecure Register</button>
           <p id="output">Push subscribe to initialize worker</p>
           <p id="subscription"></p>
         </div>
@@ -56,17 +64,6 @@
             $('#output').text('unsubscribed');
           }
         }
-        /*if (location.protocol === 'https:') {
-          $('#httpregister').hide();
-        } else {
-          $('#httpregister').click(function () {
-            OneSignal.push(['registerForPushNotifications']);
-          });
-        }*/
-        OneSignal.push(['registerForPushNotifications']);
-        OneSignal.push(function () {
-          console.log('push notifications supported:', OneSignal.isPushNotificationsSupported());
-        });
         $('#subscribe').click(function () {
           OneSignal.push(['setSubscription', true]);
         });
@@ -82,6 +79,30 @@
             console.log('subscription changed', isSubscribed);
           });
         });
+        OneSignal.push(function () {
+          if (!OneSignal.isPushNotificationsSupported()) {
+            console.log('push notifications not supported');
+            return;
+          }
+
+          OneSignal.isPushNotificationsEnabled(function (enabled) {
+            if (enabled) {
+              console.log('notifications already enabled');
+              return;
+            }
+
+            console.log('notifications not enabled');
+            OneSignal.getUserId(function (uid) {
+              console.log('uid found, leave user alone');
+              if (!uid) {
+                $('#notify-bar').collapse('show');
+              }
+            })
+          });
+        });
+        /*setTimeout(function () {
+          $('#notify-bar').collapse('show');
+        }, 500);*/
       });
     </script>
     <!--<script>
