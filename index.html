@@ -85,8 +85,6 @@
             }
 
             OneSignal.isPushNotificationsEnabled(function (enabled) {
-              console.log('TLS Status', OneSignal.zoo.tls);
-
               if (enabled) {
                 console.log('notifications already enabled');
                 return;
