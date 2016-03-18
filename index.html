@@ -93,7 +93,7 @@
 
             console.log('notifications not enabled');
             OneSignal.getUserId(function (uid) {
-              console.log('uid found, leave user alone');
+              console.log('uid found, leave user alone', uid);
               if (!uid) {
                 $('#notify-bar').collapse('show');
               }
