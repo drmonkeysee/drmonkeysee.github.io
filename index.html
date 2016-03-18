@@ -26,8 +26,8 @@
       <div class="panel-body">
         <ul class="list-inline">
           <li>Would you like notifications from Zoo?</li>
-          <li><button type="button" class="btn btn-default">Deny</button></li>
-          <li><button type="button" class="btn btn-primary">Allow</button></li>
+          <li><button id="notify-deny" type="button" class="btn btn-default">Deny</button></li>
+          <li><button id="notify-allow" type="button" class="btn btn-primary">Allow</button></li>
         </ul>
       </div>
     </div>
@@ -77,6 +77,17 @@
             console.log('subscription changed', isSubscribed);
           });
         });
+        $('#notify-allow').click(function () {
+          OneSignal.push(['registerForPushNotifications']);
+          setTimeout(function() {
+            $('#notify-bar').collapse('hide');
+          }, 200);
+        });
+        $('#notify-deny').click(function () {
+          setTimeout(function() {
+            $('#notify-bar').collapse('hide');
+          }, 200);
+        });
         if (location.protocol === 'http:') {
           OneSignal.push(function () {
             if (!OneSignal.isPushNotificationsSupported()) {
@@ -92,13 +103,16 @@
 
               console.log('notifications not enabled');
 
-              $('#notify-bar').collapse('show');
+              OneSignal.getUserId(function (uid) {
+                console.log('user is', uid);
+              });
+
+              setTimeout(function () {
+                $('#notify-bar').collapse('show');
+              }, 500);
             });
           });
         }
-        /*setTimeout(function () {
-          $('#notify-bar').collapse('show');
-        }, 500);*/
       });
     </script>
     <!--<script>
