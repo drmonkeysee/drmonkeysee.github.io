@@ -56,13 +56,14 @@
             $('#output').text('unsubscribed');
           }
         }
-        if (location.protocol === 'https:') {
+        /*if (location.protocol === 'https:') {
           $('#httpregister').hide();
         } else {
           $('#httpregister').click(function () {
             OneSignal.push(['registerForPushNotifications']);
           });
-        }
+        }*/
+        OneSignal.push(['registerForPushNotifications']);
         OneSignal.push(function () {
           console.log('push notifications supported:', OneSignal.isPushNotificationsSupported());
         });
