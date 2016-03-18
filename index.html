@@ -96,16 +96,17 @@
             }
 
             OneSignal.isPushNotificationsEnabled(function (enabled) {
+              OneSignal.getUserId(function (uid) {
+                console.log('user is', uid);
+              });
+
+              
               if (enabled) {
                 console.log('notifications already enabled');
                 return;
               }
 
               console.log('notifications not enabled');
-
-              OneSignal.getUserId(function (uid) {
-                console.log('user is', uid);
-              });
 
               setTimeout(function () {
                 $('#notify-bar').collapse('show');
