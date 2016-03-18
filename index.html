@@ -9,9 +9,16 @@
     <script>
       var OneSignal = OneSignal || [];
       OneSignal.LOGGING = true;
-      OneSignal.push(['init', {
-        appId: '70993a42-7820-4f21-bcd2-21519d0b6227'
-      }]);
+      if (location.protocol === 'https:') {
+        OneSignal.push(['init', {
+          appId: '70993a42-7820-4f21-bcd2-21519d0b6227'
+        }]);
+      } else {
+        OneSignal.push(['init', {
+          appId: '70993a42-7820-4f21-bcd2-21519d0b6227',
+          subdomainName: 'drmonkeysee-github'
+        }]);
+      }
       OneSignal.push(['getUserId', function (uid) { console.log('My id is:', uid); }]);
       OneSignal.push(['sendTag', 'foo', 'foovalue', function (tags) { console.log('Set tags:', tags); }]);
     </script>
@@ -23,6 +30,7 @@
           <h1>Get some notifications, jerk</h1>
           <button id="subscribe" class="btn btn-default" type="submit">Subscribe</button>
           <button id="unsubscribe" class="btn btn-default" type="submit">Unsubscribe</button>
+          <button id="httpregister" class="btn btn-default" type="submit">Insecure Register</button>
           <p id="output">Push subscribe to initialize worker</p>
           <p id="subscription"></p>
         </div>
@@ -48,6 +56,13 @@
             $('#output').text('unsubscribed');
           }
         }
+        if (location.protocol === 'https:') {
+          $('#httpregister').hide();
+        } else {
+          $('#httpregister').click(function () {
+            OneSignal.push(['registerForPushNotifications']);
+          });
+        }
         OneSignal.push(function () {
           console.log('push notifications supported:', OneSignal.isPushNotificationsSupported());
         });
@@ -68,5 +83,31 @@
         });
       });
     </script>
+    <!--<script>
+      $(function () {
+      function setButtonUI(subscribed) {
+        if (!('Notification' in window) || Notification.permission === 'denied') {
+          // hide button UI
+        } else if (subscribed) {
+          // set to unsubscribe state
+        } else {
+          // set to resubscribe state
+        }
+      }
+      $('#subscribe-button').click(function () {
+        OneSignal.push(['isPushNotificationsEnabled', function (enabled) { // TODO: can i do this without querying enabled
+          OneSignal.setSubscription(!enabled);
+        }]);
+      });
+      OneSignal.push(function () {
+        OneSignal.on('subscriptionChange', function (isSubscribed) {
+          setButtonUI(isSubscribed);
+        });
+      });
+      OneSignal.push(['isPushNotificationsEnabled', function (enabled) {
+        setButtonUI(enabled);
+      }]);
+    });
+    </script>-->
   </body>
 </html>
