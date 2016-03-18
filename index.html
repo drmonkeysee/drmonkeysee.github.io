@@ -9,18 +9,19 @@
     <script>
       var OneSignal = OneSignal || [];
       OneSignal.LOGGING = true;
+      OneSignal.zoo = {};
       if (location.protocol === 'https:') {
         OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227'
         }]);
+        OneSignal.zoo.tls = true;
       } else {
         OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227',
           subdomainName: 'drmonkeysee-github'
         }]);
+        OneSignal.zoo.tls = false;
       }
-      OneSignal.push(['getUserId', function (uid) { console.log('My id is:', uid); }]);
-      OneSignal.push(['sendTag', 'foo', 'foovalue', function (tags) { console.log('Set tags:', tags); }]);
     </script>
   </head>
   <body>
@@ -86,6 +87,8 @@
           }
 
           OneSignal.isPushNotificationsEnabled(function (enabled) {
+            console.log('TLS Status', OneSignal.zoo.tls);
+
             if (enabled) {
               console.log('notifications already enabled');
               return;
