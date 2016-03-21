@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notify</title>
+  </head>
+  <body>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script>
+      if (location.protocol === 'https:') {
+        OneSignal.push(['init', {
+          appId: '70993a42-7820-4f21-bcd2-21519d0b6227'
+        }]);
+        OneSignal.push(function () {
+          OneSignal.on('subscriptionChange', function (isSubscribed) {
+            console.log('subscription changed', isSubscribed);
+            alert('thing done: ' + isSubscribed);
+            window.close();
+          });
+        });
+      } else {
+        setTimeout(function () { window.close(); }, 500);
+      }
+    </script>
+  </body>
+</html>

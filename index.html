@@ -9,23 +9,23 @@
     <script>
       var OneSignal = OneSignal || [];
       OneSignal.LOGGING = true;
-      if (location.protocol === 'https:') {
+      /*if (location.protocol === 'https:') {*/
         OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227'
         }]);
-      } else {
+      /*} else {
         OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227',
           subdomainName: 'drmonkeysee-github'
         }]);
-      }
+      }*/
     </script>
   </head>
   <body>
     <div id="notify-bar" class="panel collapse">
       <div class="panel-body">
         <ul class="list-inline">
-          <li>Would you like notifications from Zoo?</li>
+          <li>Would you like notifications from me?</li>
           <li><button id="notify-deny" type="button" class="btn btn-default">Deny</button></li>
           <li><button id="notify-allow" type="button" class="btn btn-primary">Allow</button></li>
         </ul>
@@ -78,10 +78,14 @@
           });
         });
         $('#notify-allow').click(function () {
-          OneSignal.push(['registerForPushNotifications']);
-          setTimeout(function() {
-            $('#notify-bar').collapse('hide');
-          }, 200);
+          //OneSignal.push(['registerForPushNotifications']);
+          var notifyWindow = window.open('https://drmonkeysee.github.io/notify.html', 'register notify');
+          notifyWindow.onunload = function () {
+            console.log('notify window closed');
+            setTimeout(function() {
+              $('#notify-bar').collapse('hide');
+            }, 200);
+          }
         });
         $('#notify-deny').click(function () {
           localStorage.setItem('deny-notify', 'yes');
