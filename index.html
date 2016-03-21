@@ -12,7 +12,7 @@
       /*if (location.protocol === 'https:') {*/
         /*OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227'
-        }]);*/
+        }]);
       /*} else {
         OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227',
@@ -45,7 +45,6 @@
     <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-    <iframe src="https://drmonkeysee.github.io/notify.html" height="100" width="100"></iframe>
     <script>
       $(function () {
         function setButtons(subscribed) {
@@ -83,6 +82,7 @@
           var notifyWindow = window.open('https://drmonkeysee.github.io/notify.html', 'register notify');
           notifyWindow.onunload = function () {
             console.log('notify window closed');
+            localStorage.setItem('allow-notify', 'yes');
             setTimeout(function() {
               $('#notify-bar').collapse('hide');
             }, 200);
@@ -103,6 +103,11 @@
 
             if (localStorage.getItem('deny-notify')) {
               console.log('push notifications denied');
+              return;
+            }
+
+            if (localStorage.getItem('allow-notify')) {
+              console.log('push notifications allowed');
               return;
             }
 
