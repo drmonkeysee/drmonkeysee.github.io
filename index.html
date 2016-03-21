@@ -108,7 +108,6 @@
 
             if (localStorage.getItem('allow-notify')) {
               console.log('push notifications allowed');
-              return;
             }
 
             OneSignal.isPushNotificationsEnabled(function (enabled) {
