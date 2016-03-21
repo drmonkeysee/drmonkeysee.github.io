@@ -9,16 +9,19 @@
     <script>
       var OneSignal = OneSignal || [];
       OneSignal.LOGGING = true;
-      /*if (location.protocol === 'https:') {*/
-        /*OneSignal.push(['init', {
+      var useShim = location.protocol === 'http:' && location.search.indexOf('shim') > -1;
+      if (location.protocol === 'https:') {
+        OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227'
         }]);
-      /*} else {
+      } else if (useShim) {
+        // no initialization
+      } else {
         OneSignal.push(['init', {
           appId: '70993a42-7820-4f21-bcd2-21519d0b6227',
           subdomainName: 'drmonkeysee-github'
         }]);
-      }*/
+      }
     </script>
   </head>
   <body>
@@ -78,14 +81,17 @@
           });
         });
         $('#notify-allow').click(function () {
-          //OneSignal.push(['registerForPushNotifications']);
-          var notifyWindow = window.open('https://drmonkeysee.github.io/notify.html', 'register notify');
-          notifyWindow.onunload = function () {
-            console.log('notify window closed');
-            localStorage.setItem('allow-notify', 'yes');
-            setTimeout(function() {
-              $('#notify-bar').collapse('hide');
-            }, 200);
+          if (useShim) {
+            var notifyWindow = window.open('https://drmonkeysee.github.io/notify.html', 'register notify');
+            notifyWindow.onunload = function () {
+              console.log('notify window closed');
+              localStorage.setItem('allow-notify', 'yes');
+              setTimeout(function() {
+                $('#notify-bar').collapse('hide');
+              }, 200);
+            }
+          } else {
+            OneSignal.push(['registerForPushNotifications']);
           }
         });
         $('#notify-deny').click(function () {
@@ -107,7 +113,7 @@
             }
 
             if (localStorage.getItem('allow-notify')) {
-              console.log('push notifications allowed');
+              console.log('push notifications allowed from shim');
             }
 
             OneSignal.isPushNotificationsEnabled(function (enabled) {
